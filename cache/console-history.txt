@@ -1,0 +1,72 @@
+await niftya.balanceOf(owner.address)
+const niftya = await nA.deploy();
+let nA = await ethers.getContractFactory("NiftyA");
+const [owner] = await ethers.getSigners();
+quit
+await niftya.balanceOf(owner.address)
+const [owner] = await ethers.getSigners();
+await niftya.balanceOf(owner.address)
+const niftya = await nA.deploy();
+let nA = await ethers.getContractFactory("NiftyA");
+await niftya.balanceOf(owner.address)
+const niftya = await nA.deploy();
+let nA = await ethers.getContractFactory("NiftyA");
+const [owner] = await ethers.getSigners();
+quit
+await niftya.balanceOf(owner.address)
+niftya.balanceOf(owner.address)
+niftya.balanceOf(owner)
+const [owner] = await ethers.getSigners();
+niftya
+const niftya = await nA.deploy();
+const nifty = nA.deploy();
+let nA = await ethers.getContractFactory("NiftyA");
+quit
+nA.interface
+let nA = await ethers.getContractFactory("NiftyA");
+await nA.deploy()
+nA
+let nA = await ethers.getContractFactory("NiftyA");
+ethers
+nA
+let nA = await ethers.getContractFactory("NiftyA");
+nftA.balanceOf(owner)
+nftA
+nftA.interface.functions
+nftA
+nftA.balanceOf(owner)
+nftA
+const [owner] = await ethers.getSigners();
+nftA
+nftA.functions
+nftA
+let nftA = await ethers.getContractFactory("NiftyA");
+quit
+nftA
+let nftA = await ethers.getContractFactory("NiftyA");
+const niftyA = await ethers.getContractFactory("NiftyA");
+const niftyA = ethers.getContractFactory("NiftyA");
+quit
+const niftyA = ethers.getContractFactory("NiftyA");
+owner
+cowner
+const [owner] = await ethers.getSigners();
+await ethers.getSigners()
+ethers.getSigners()
+ethers
+owner
+getSigners
+getSigners()
+tasks
+await constructor()
+constructor
+network
+valueOf
+hardat
+hardhat
+artifacts
+addresses
+address
+ethers.addresses
+ethers
+config

@@ -1,0 +1,4638 @@
+{
+  "version": "3",
+  "log": [
+    {
+      "ERC165": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC165",
+            "src": "@openzeppelin/contracts/introspection/ERC165.sol:24"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC165",
+              "label": "_supportedInterfaces",
+              "type": "t_mapping(t_bytes4,t_bool)",
+              "src": "@openzeppelin/contracts/introspection/ERC165.sol:22"
+            }
+          ],
+          "types": {
+            "t_mapping(t_bytes4,t_bool)": {
+              "label": "mapping(bytes4 => bool)"
+            },
+            "t_bytes4": {
+              "label": "bytes4"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC165": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "SafeMath": {
+        "version": {
+          "withMetadata": "d8874f05de9262765e205e30d7e3b67c86ca6e1653277253f37caf3cec510258",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "ERC721": {
+        "version": {
+          "withMetadata": "411b1ff38bb13a08b94c47bde3920d676951e26bb691d3edc417f4fb24b1fe7c",
+          "withoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1",
+          "linkedWithoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1"
+        },
+        "inherit": [
+          "IERC721Enumerable",
+          "IERC721Metadata",
+          "IERC721",
+          "ERC165",
+          "IERC165",
+          "Context"
+        ],
+        "libraries": [
+          "SafeMath",
+          "Address",
+          "EnumerableSet",
+          "EnumerableMap",
+          "Strings"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC721",
+            "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:93"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC721",
+              "label": "_holderTokens",
+              "type": "t_mapping(t_address,t_struct(UintSet)2835_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:33"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenOwners",
+              "type": "t_struct(UintToAddressMap)2212_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:36"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenApprovals",
+              "type": "t_mapping(t_uint256,t_address)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:39"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_operatorApprovals",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:42"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_name",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:45"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_symbol",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:48"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenURIs",
+              "type": "t_mapping(t_uint256,t_string_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:51"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_baseURI",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:54"
+            }
+          ],
+          "types": {
+            "t_mapping(t_address,t_struct(UintSet)2835_storage)": {
+              "label": "mapping(address => struct EnumerableSet.UintSet)"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_struct(UintSet)2835_storage": {
+              "label": "struct EnumerableSet.UintSet",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Set)2449_storage"
+                }
+              ]
+            },
+            "t_struct(Set)2449_storage": {
+              "label": "struct EnumerableSet.Set",
+              "members": [
+                {
+                  "label": "_values",
+                  "type": "t_array(t_bytes32)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_bytes32)dyn_storage": {
+              "label": "bytes32[]"
+            },
+            "t_bytes32": {
+              "label": "bytes32"
+            },
+            "t_mapping(t_bytes32,t_uint256)": {
+              "label": "mapping(bytes32 => uint256)"
+            },
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_struct(UintToAddressMap)2212_storage": {
+              "label": "struct EnumerableMap.UintToAddressMap",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Map)1894_storage"
+                }
+              ]
+            },
+            "t_struct(Map)1894_storage": {
+              "label": "struct EnumerableMap.Map",
+              "members": [
+                {
+                  "label": "_entries",
+                  "type": "t_array(t_struct(MapEntry)1886_storage)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_struct(MapEntry)1886_storage)dyn_storage": {
+              "label": "struct EnumerableMap.MapEntry[]"
+            },
+            "t_struct(MapEntry)1886_storage": {
+              "label": "struct EnumerableMap.MapEntry",
+              "members": [
+                {
+                  "label": "_key",
+                  "type": "t_bytes32"
+                },
+                {
+                  "label": "_value",
+                  "type": "t_bytes32"
+                }
+              ]
+            },
+            "t_mapping(t_uint256,t_address)": {
+              "label": "mapping(uint256 => address)"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_string_storage": {
+              "label": "string"
+            },
+            "t_mapping(t_uint256,t_string_storage)": {
+              "label": "mapping(uint256 => string)"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Enumerable": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Metadata": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Receiver": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Address": {
+        "version": {
+          "withMetadata": "f84b111d91cd3f4f6bde6cb7481eabb5118a78942d2f0a0b4c72f9a10d3558c3",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts/utils/Address.sol:167"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Context": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableMap": {
+        "version": {
+          "withMetadata": "4c564c78699e6425990209805eede39de2ba53c6ec25e68539709e56af473d3c",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableSet": {
+        "version": {
+          "withMetadata": "817c6f71e1935e9ef03df90332e4c662c55b721e3989358f1eb99bba197ef59a",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Strings": {
+        "version": {
+          "withMetadata": "c59e4634fdd0ffe83aba6d9c814752d7be725e5a1981b8dcb106891f9095401d",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "NiftyA": {
+        "version": {
+          "withMetadata": "c25b3b2bcc6efd02ee993e2f4387926f17ac640bb6d937c20700560829e8c20b",
+          "withoutMetadata": "c95c86f4e737136ad81cddc23c41c32c614a26485d8ba7e30684ce52dd3f25e1",
+          "linkedWithoutMetadata": "c95c86f4e737136ad81cddc23c41c32c614a26485d8ba7e30684ce52dd3f25e1"
+        },
+        "inherit": [
+          "ERC721",
+          "IERC721Enumerable",
+          "IERC721Metadata",
+          "IERC721",
+          "ERC165",
+          "IERC165",
+          "Context"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "NiftyA",
+            "src": "contracts/NiftyA.sol:7"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "console": {
+        "version": {
+          "withMetadata": "a6fdc3350f926fd5250c19dd1ee1a85c1bb9458dc9c8e7478988a29a1c8433f1",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      }
+    },
+    {
+      "ERC165": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC165",
+            "src": "@openzeppelin/contracts/introspection/ERC165.sol:24"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC165",
+              "label": "_supportedInterfaces",
+              "type": "t_mapping(t_bytes4,t_bool)",
+              "src": "@openzeppelin/contracts/introspection/ERC165.sol:22"
+            }
+          ],
+          "types": {
+            "t_mapping(t_bytes4,t_bool)": {
+              "label": "mapping(bytes4 => bool)"
+            },
+            "t_bytes4": {
+              "label": "bytes4"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC165": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "SafeMath": {
+        "version": {
+          "withMetadata": "d8874f05de9262765e205e30d7e3b67c86ca6e1653277253f37caf3cec510258",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "ERC721": {
+        "version": {
+          "withMetadata": "411b1ff38bb13a08b94c47bde3920d676951e26bb691d3edc417f4fb24b1fe7c",
+          "withoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1",
+          "linkedWithoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1"
+        },
+        "inherit": [
+          "IERC721Enumerable",
+          "IERC721Metadata",
+          "IERC721",
+          "ERC165",
+          "IERC165",
+          "Context"
+        ],
+        "libraries": [
+          "SafeMath",
+          "Address",
+          "EnumerableSet",
+          "EnumerableMap",
+          "Strings"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC721",
+            "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:93"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC721",
+              "label": "_holderTokens",
+              "type": "t_mapping(t_address,t_struct(UintSet)2835_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:33"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenOwners",
+              "type": "t_struct(UintToAddressMap)2212_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:36"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenApprovals",
+              "type": "t_mapping(t_uint256,t_address)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:39"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_operatorApprovals",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:42"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_name",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:45"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_symbol",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:48"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenURIs",
+              "type": "t_mapping(t_uint256,t_string_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:51"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_baseURI",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:54"
+            }
+          ],
+          "types": {
+            "t_mapping(t_address,t_struct(UintSet)2835_storage)": {
+              "label": "mapping(address => struct EnumerableSet.UintSet)"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_struct(UintSet)2835_storage": {
+              "label": "struct EnumerableSet.UintSet",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Set)2449_storage"
+                }
+              ]
+            },
+            "t_struct(Set)2449_storage": {
+              "label": "struct EnumerableSet.Set",
+              "members": [
+                {
+                  "label": "_values",
+                  "type": "t_array(t_bytes32)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_bytes32)dyn_storage": {
+              "label": "bytes32[]"
+            },
+            "t_bytes32": {
+              "label": "bytes32"
+            },
+            "t_mapping(t_bytes32,t_uint256)": {
+              "label": "mapping(bytes32 => uint256)"
+            },
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_struct(UintToAddressMap)2212_storage": {
+              "label": "struct EnumerableMap.UintToAddressMap",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Map)1894_storage"
+                }
+              ]
+            },
+            "t_struct(Map)1894_storage": {
+              "label": "struct EnumerableMap.Map",
+              "members": [
+                {
+                  "label": "_entries",
+                  "type": "t_array(t_struct(MapEntry)1886_storage)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_struct(MapEntry)1886_storage)dyn_storage": {
+              "label": "struct EnumerableMap.MapEntry[]"
+            },
+            "t_struct(MapEntry)1886_storage": {
+              "label": "struct EnumerableMap.MapEntry",
+              "members": [
+                {
+                  "label": "_key",
+                  "type": "t_bytes32"
+                },
+                {
+                  "label": "_value",
+                  "type": "t_bytes32"
+                }
+              ]
+            },
+            "t_mapping(t_uint256,t_address)": {
+              "label": "mapping(uint256 => address)"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_string_storage": {
+              "label": "string"
+            },
+            "t_mapping(t_uint256,t_string_storage)": {
+              "label": "mapping(uint256 => string)"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Enumerable": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Metadata": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Receiver": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Address": {
+        "version": {
+          "withMetadata": "f84b111d91cd3f4f6bde6cb7481eabb5118a78942d2f0a0b4c72f9a10d3558c3",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts/utils/Address.sol:167"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Context": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableMap": {
+        "version": {
+          "withMetadata": "4c564c78699e6425990209805eede39de2ba53c6ec25e68539709e56af473d3c",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableSet": {
+        "version": {
+          "withMetadata": "817c6f71e1935e9ef03df90332e4c662c55b721e3989358f1eb99bba197ef59a",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Strings": {
+        "version": {
+          "withMetadata": "c59e4634fdd0ffe83aba6d9c814752d7be725e5a1981b8dcb106891f9095401d",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "NiftyB": {
+        "version": {
+          "withMetadata": "a291c42941c40cd7629d66801aaee2b9fba2b88d8460abd1f2f6e5b5d4e29015",
+          "withoutMetadata": "5cc738acc69aae4dea7d619c190c3b2eae52dab1a2f7afe6b39678eaf48b36b3",
+          "linkedWithoutMetadata": "5cc738acc69aae4dea7d619c190c3b2eae52dab1a2f7afe6b39678eaf48b36b3"
+        },
+        "inherit": [
+          "ERC721",
+          "IERC721Enumerable",
+          "IERC721Metadata",
+          "IERC721",
+          "ERC165",
+          "IERC165",
+          "Context"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "NiftyB",
+            "src": "contracts/NiftyB.sol:7"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "console": {
+        "version": {
+          "withMetadata": "a6fdc3350f926fd5250c19dd1ee1a85c1bb9458dc9c8e7478988a29a1c8433f1",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      }
+    },
+    {
+      "ERC165": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC165",
+            "src": "@openzeppelin/contracts/introspection/ERC165.sol:24"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC165",
+              "label": "_supportedInterfaces",
+              "type": "t_mapping(t_bytes4,t_bool)",
+              "src": "@openzeppelin/contracts/introspection/ERC165.sol:22"
+            }
+          ],
+          "types": {
+            "t_mapping(t_bytes4,t_bool)": {
+              "label": "mapping(bytes4 => bool)"
+            },
+            "t_bytes4": {
+              "label": "bytes4"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC165": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "SafeMath": {
+        "version": {
+          "withMetadata": "d8874f05de9262765e205e30d7e3b67c86ca6e1653277253f37caf3cec510258",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "ERC721": {
+        "version": {
+          "withMetadata": "411b1ff38bb13a08b94c47bde3920d676951e26bb691d3edc417f4fb24b1fe7c",
+          "withoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1",
+          "linkedWithoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1"
+        },
+        "inherit": [
+          "IERC721Enumerable",
+          "IERC721Metadata",
+          "IERC721",
+          "ERC165",
+          "IERC165",
+          "Context"
+        ],
+        "libraries": [
+          "SafeMath",
+          "Address",
+          "EnumerableSet",
+          "EnumerableMap",
+          "Strings"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC721",
+            "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:93"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC721",
+              "label": "_holderTokens",
+              "type": "t_mapping(t_address,t_struct(UintSet)2835_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:33"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenOwners",
+              "type": "t_struct(UintToAddressMap)2212_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:36"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenApprovals",
+              "type": "t_mapping(t_uint256,t_address)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:39"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_operatorApprovals",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:42"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_name",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:45"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_symbol",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:48"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenURIs",
+              "type": "t_mapping(t_uint256,t_string_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:51"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_baseURI",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:54"
+            }
+          ],
+          "types": {
+            "t_mapping(t_address,t_struct(UintSet)2835_storage)": {
+              "label": "mapping(address => struct EnumerableSet.UintSet)"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_struct(UintSet)2835_storage": {
+              "label": "struct EnumerableSet.UintSet",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Set)2449_storage"
+                }
+              ]
+            },
+            "t_struct(Set)2449_storage": {
+              "label": "struct EnumerableSet.Set",
+              "members": [
+                {
+                  "label": "_values",
+                  "type": "t_array(t_bytes32)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_bytes32)dyn_storage": {
+              "label": "bytes32[]"
+            },
+            "t_bytes32": {
+              "label": "bytes32"
+            },
+            "t_mapping(t_bytes32,t_uint256)": {
+              "label": "mapping(bytes32 => uint256)"
+            },
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_struct(UintToAddressMap)2212_storage": {
+              "label": "struct EnumerableMap.UintToAddressMap",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Map)1894_storage"
+                }
+              ]
+            },
+            "t_struct(Map)1894_storage": {
+              "label": "struct EnumerableMap.Map",
+              "members": [
+                {
+                  "label": "_entries",
+                  "type": "t_array(t_struct(MapEntry)1886_storage)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_struct(MapEntry)1886_storage)dyn_storage": {
+              "label": "struct EnumerableMap.MapEntry[]"
+            },
+            "t_struct(MapEntry)1886_storage": {
+              "label": "struct EnumerableMap.MapEntry",
+              "members": [
+                {
+                  "label": "_key",
+                  "type": "t_bytes32"
+                },
+                {
+                  "label": "_value",
+                  "type": "t_bytes32"
+                }
+              ]
+            },
+            "t_mapping(t_uint256,t_address)": {
+              "label": "mapping(uint256 => address)"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_string_storage": {
+              "label": "string"
+            },
+            "t_mapping(t_uint256,t_string_storage)": {
+              "label": "mapping(uint256 => string)"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Enumerable": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Metadata": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Receiver": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Address": {
+        "version": {
+          "withMetadata": "f84b111d91cd3f4f6bde6cb7481eabb5118a78942d2f0a0b4c72f9a10d3558c3",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts/utils/Address.sol:167"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Context": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableMap": {
+        "version": {
+          "withMetadata": "4c564c78699e6425990209805eede39de2ba53c6ec25e68539709e56af473d3c",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableSet": {
+        "version": {
+          "withMetadata": "817c6f71e1935e9ef03df90332e4c662c55b721e3989358f1eb99bba197ef59a",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Strings": {
+        "version": {
+          "withMetadata": "c59e4634fdd0ffe83aba6d9c814752d7be725e5a1981b8dcb106891f9095401d",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "NiftyA": {
+        "version": {
+          "withMetadata": "855a55605bef6b9186d97bb55e3a81385e1e06b1980fc05a89fc2289d1e3c6f8",
+          "withoutMetadata": "5cc738acc69aae4dea7d619c190c3b2eae52dab1a2f7afe6b39678eaf48b36b3",
+          "linkedWithoutMetadata": "5cc738acc69aae4dea7d619c190c3b2eae52dab1a2f7afe6b39678eaf48b36b3"
+        },
+        "inherit": [
+          "ERC721",
+          "IERC721Enumerable",
+          "IERC721Metadata",
+          "IERC721",
+          "ERC165",
+          "IERC165",
+          "Context"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "NiftyA",
+            "src": "contracts/NiftyB.sol:7"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "console": {
+        "version": {
+          "withMetadata": "a6fdc3350f926fd5250c19dd1ee1a85c1bb9458dc9c8e7478988a29a1c8433f1",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      }
+    },
+    {
+      "ERC165": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC165",
+            "src": "@openzeppelin/contracts/introspection/ERC165.sol:24"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC165",
+              "label": "_supportedInterfaces",
+              "type": "t_mapping(t_bytes4,t_bool)",
+              "src": "@openzeppelin/contracts/introspection/ERC165.sol:22"
+            }
+          ],
+          "types": {
+            "t_mapping(t_bytes4,t_bool)": {
+              "label": "mapping(bytes4 => bool)"
+            },
+            "t_bytes4": {
+              "label": "bytes4"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC165": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "SafeMath": {
+        "version": {
+          "withMetadata": "d8874f05de9262765e205e30d7e3b67c86ca6e1653277253f37caf3cec510258",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "ERC721": {
+        "version": {
+          "withMetadata": "411b1ff38bb13a08b94c47bde3920d676951e26bb691d3edc417f4fb24b1fe7c",
+          "withoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1",
+          "linkedWithoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1"
+        },
+        "inherit": [
+          "IERC721Enumerable",
+          "IERC721Metadata",
+          "IERC721",
+          "ERC165",
+          "IERC165",
+          "Context"
+        ],
+        "libraries": [
+          "SafeMath",
+          "Address",
+          "EnumerableSet",
+          "EnumerableMap",
+          "Strings"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC721",
+            "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:93"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC721",
+              "label": "_holderTokens",
+              "type": "t_mapping(t_address,t_struct(UintSet)2835_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:33"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenOwners",
+              "type": "t_struct(UintToAddressMap)2212_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:36"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenApprovals",
+              "type": "t_mapping(t_uint256,t_address)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:39"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_operatorApprovals",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:42"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_name",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:45"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_symbol",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:48"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenURIs",
+              "type": "t_mapping(t_uint256,t_string_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:51"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_baseURI",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:54"
+            }
+          ],
+          "types": {
+            "t_mapping(t_address,t_struct(UintSet)2835_storage)": {
+              "label": "mapping(address => struct EnumerableSet.UintSet)"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_struct(UintSet)2835_storage": {
+              "label": "struct EnumerableSet.UintSet",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Set)2449_storage"
+                }
+              ]
+            },
+            "t_struct(Set)2449_storage": {
+              "label": "struct EnumerableSet.Set",
+              "members": [
+                {
+                  "label": "_values",
+                  "type": "t_array(t_bytes32)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_bytes32)dyn_storage": {
+              "label": "bytes32[]"
+            },
+            "t_bytes32": {
+              "label": "bytes32"
+            },
+            "t_mapping(t_bytes32,t_uint256)": {
+              "label": "mapping(bytes32 => uint256)"
+            },
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_struct(UintToAddressMap)2212_storage": {
+              "label": "struct EnumerableMap.UintToAddressMap",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Map)1894_storage"
+                }
+              ]
+            },
+            "t_struct(Map)1894_storage": {
+              "label": "struct EnumerableMap.Map",
+              "members": [
+                {
+                  "label": "_entries",
+                  "type": "t_array(t_struct(MapEntry)1886_storage)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_struct(MapEntry)1886_storage)dyn_storage": {
+              "label": "struct EnumerableMap.MapEntry[]"
+            },
+            "t_struct(MapEntry)1886_storage": {
+              "label": "struct EnumerableMap.MapEntry",
+              "members": [
+                {
+                  "label": "_key",
+                  "type": "t_bytes32"
+                },
+                {
+                  "label": "_value",
+                  "type": "t_bytes32"
+                }
+              ]
+            },
+            "t_mapping(t_uint256,t_address)": {
+              "label": "mapping(uint256 => address)"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_string_storage": {
+              "label": "string"
+            },
+            "t_mapping(t_uint256,t_string_storage)": {
+              "label": "mapping(uint256 => string)"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Enumerable": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Metadata": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Receiver": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Address": {
+        "version": {
+          "withMetadata": "f84b111d91cd3f4f6bde6cb7481eabb5118a78942d2f0a0b4c72f9a10d3558c3",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts/utils/Address.sol:167"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Context": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableMap": {
+        "version": {
+          "withMetadata": "4c564c78699e6425990209805eede39de2ba53c6ec25e68539709e56af473d3c",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableSet": {
+        "version": {
+          "withMetadata": "817c6f71e1935e9ef03df90332e4c662c55b721e3989358f1eb99bba197ef59a",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Strings": {
+        "version": {
+          "withMetadata": "c59e4634fdd0ffe83aba6d9c814752d7be725e5a1981b8dcb106891f9095401d",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "NiftyA": {
+        "version": {
+          "withMetadata": "8b0fb9822a06b5b17e7bf58cec218f9d9543b31517d6ce7fcc0e11d329e2f293",
+          "withoutMetadata": "8e55f788587aec29b9ceb3e56c16d036bcc5ba24838053081e98e4f4a80ff6a7",
+          "linkedWithoutMetadata": "8e55f788587aec29b9ceb3e56c16d036bcc5ba24838053081e98e4f4a80ff6a7"
+        },
+        "inherit": [
+          "ERC721",
+          "IERC721Enumerable",
+          "IERC721Metadata",
+          "IERC721",
+          "ERC165",
+          "IERC165",
+          "Context"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "NiftyA",
+            "src": "contracts/NiftyA.sol:7"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "console": {
+        "version": {
+          "withMetadata": "a6fdc3350f926fd5250c19dd1ee1a85c1bb9458dc9c8e7478988a29a1c8433f1",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      }
+    },
+    {
+      "ERC165": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC165",
+            "src": "@openzeppelin/contracts/introspection/ERC165.sol:24"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC165",
+              "label": "_supportedInterfaces",
+              "type": "t_mapping(t_bytes4,t_bool)",
+              "src": "@openzeppelin/contracts/introspection/ERC165.sol:22"
+            }
+          ],
+          "types": {
+            "t_mapping(t_bytes4,t_bool)": {
+              "label": "mapping(bytes4 => bool)"
+            },
+            "t_bytes4": {
+              "label": "bytes4"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC165": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "SafeMath": {
+        "version": {
+          "withMetadata": "d8874f05de9262765e205e30d7e3b67c86ca6e1653277253f37caf3cec510258",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "ERC721": {
+        "version": {
+          "withMetadata": "411b1ff38bb13a08b94c47bde3920d676951e26bb691d3edc417f4fb24b1fe7c",
+          "withoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1",
+          "linkedWithoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1"
+        },
+        "inherit": [
+          "IERC721Enumerable",
+          "IERC721Metadata",
+          "IERC721",
+          "ERC165",
+          "IERC165",
+          "Context"
+        ],
+        "libraries": [
+          "SafeMath",
+          "Address",
+          "EnumerableSet",
+          "EnumerableMap",
+          "Strings"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC721",
+            "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:93"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC721",
+              "label": "_holderTokens",
+              "type": "t_mapping(t_address,t_struct(UintSet)2835_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:33"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenOwners",
+              "type": "t_struct(UintToAddressMap)2212_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:36"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenApprovals",
+              "type": "t_mapping(t_uint256,t_address)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:39"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_operatorApprovals",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:42"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_name",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:45"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_symbol",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:48"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenURIs",
+              "type": "t_mapping(t_uint256,t_string_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:51"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_baseURI",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:54"
+            }
+          ],
+          "types": {
+            "t_mapping(t_address,t_struct(UintSet)2835_storage)": {
+              "label": "mapping(address => struct EnumerableSet.UintSet)"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_struct(UintSet)2835_storage": {
+              "label": "struct EnumerableSet.UintSet",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Set)2449_storage"
+                }
+              ]
+            },
+            "t_struct(Set)2449_storage": {
+              "label": "struct EnumerableSet.Set",
+              "members": [
+                {
+                  "label": "_values",
+                  "type": "t_array(t_bytes32)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_bytes32)dyn_storage": {
+              "label": "bytes32[]"
+            },
+            "t_bytes32": {
+              "label": "bytes32"
+            },
+            "t_mapping(t_bytes32,t_uint256)": {
+              "label": "mapping(bytes32 => uint256)"
+            },
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_struct(UintToAddressMap)2212_storage": {
+              "label": "struct EnumerableMap.UintToAddressMap",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Map)1894_storage"
+                }
+              ]
+            },
+            "t_struct(Map)1894_storage": {
+              "label": "struct EnumerableMap.Map",
+              "members": [
+                {
+                  "label": "_entries",
+                  "type": "t_array(t_struct(MapEntry)1886_storage)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_struct(MapEntry)1886_storage)dyn_storage": {
+              "label": "struct EnumerableMap.MapEntry[]"
+            },
+            "t_struct(MapEntry)1886_storage": {
+              "label": "struct EnumerableMap.MapEntry",
+              "members": [
+                {
+                  "label": "_key",
+                  "type": "t_bytes32"
+                },
+                {
+                  "label": "_value",
+                  "type": "t_bytes32"
+                }
+              ]
+            },
+            "t_mapping(t_uint256,t_address)": {
+              "label": "mapping(uint256 => address)"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_string_storage": {
+              "label": "string"
+            },
+            "t_mapping(t_uint256,t_string_storage)": {
+              "label": "mapping(uint256 => string)"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Enumerable": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Metadata": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Receiver": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Address": {
+        "version": {
+          "withMetadata": "f84b111d91cd3f4f6bde6cb7481eabb5118a78942d2f0a0b4c72f9a10d3558c3",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts/utils/Address.sol:167"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Context": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableMap": {
+        "version": {
+          "withMetadata": "4c564c78699e6425990209805eede39de2ba53c6ec25e68539709e56af473d3c",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableSet": {
+        "version": {
+          "withMetadata": "817c6f71e1935e9ef03df90332e4c662c55b721e3989358f1eb99bba197ef59a",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Strings": {
+        "version": {
+          "withMetadata": "c59e4634fdd0ffe83aba6d9c814752d7be725e5a1981b8dcb106891f9095401d",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "NiftyA": {
+        "version": {
+          "withMetadata": "21babbd690c7ff403d546f3c9b336ee0ad0a81bfa3c609c79da9786ecde231a7",
+          "withoutMetadata": "6d15dc4fd69e254aa98481626f747bef6ed73a2a681a8358f9eb4f6175eaffb1",
+          "linkedWithoutMetadata": "6d15dc4fd69e254aa98481626f747bef6ed73a2a681a8358f9eb4f6175eaffb1"
+        },
+        "inherit": [
+          "ERC721",
+          "IERC721Enumerable",
+          "IERC721Metadata",
+          "IERC721",
+          "ERC165",
+          "IERC165",
+          "Context"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "NiftyA",
+            "src": "contracts/NiftyA.sol:7"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "console": {
+        "version": {
+          "withMetadata": "a6fdc3350f926fd5250c19dd1ee1a85c1bb9458dc9c8e7478988a29a1c8433f1",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      }
+    },
+    {
+      "ERC165": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC165",
+            "src": "@openzeppelin/contracts/introspection/ERC165.sol:24"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC165",
+              "label": "_supportedInterfaces",
+              "type": "t_mapping(t_bytes4,t_bool)",
+              "src": "@openzeppelin/contracts/introspection/ERC165.sol:22"
+            }
+          ],
+          "types": {
+            "t_mapping(t_bytes4,t_bool)": {
+              "label": "mapping(bytes4 => bool)"
+            },
+            "t_bytes4": {
+              "label": "bytes4"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC165": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "SafeMath": {
+        "version": {
+          "withMetadata": "d8874f05de9262765e205e30d7e3b67c86ca6e1653277253f37caf3cec510258",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "ERC721": {
+        "version": {
+          "withMetadata": "411b1ff38bb13a08b94c47bde3920d676951e26bb691d3edc417f4fb24b1fe7c",
+          "withoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1",
+          "linkedWithoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1"
+        },
+        "inherit": [
+          "IERC721Enumerable",
+          "IERC721Metadata",
+          "IERC721",
+          "ERC165",
+          "IERC165",
+          "Context"
+        ],
+        "libraries": [
+          "SafeMath",
+          "Address",
+          "EnumerableSet",
+          "EnumerableMap",
+          "Strings"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC721",
+            "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:93"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC721",
+              "label": "_holderTokens",
+              "type": "t_mapping(t_address,t_struct(UintSet)2835_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:33"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenOwners",
+              "type": "t_struct(UintToAddressMap)2212_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:36"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenApprovals",
+              "type": "t_mapping(t_uint256,t_address)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:39"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_operatorApprovals",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:42"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_name",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:45"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_symbol",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:48"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenURIs",
+              "type": "t_mapping(t_uint256,t_string_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:51"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_baseURI",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:54"
+            }
+          ],
+          "types": {
+            "t_mapping(t_address,t_struct(UintSet)2835_storage)": {
+              "label": "mapping(address => struct EnumerableSet.UintSet)"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_struct(UintSet)2835_storage": {
+              "label": "struct EnumerableSet.UintSet",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Set)2449_storage"
+                }
+              ]
+            },
+            "t_struct(Set)2449_storage": {
+              "label": "struct EnumerableSet.Set",
+              "members": [
+                {
+                  "label": "_values",
+                  "type": "t_array(t_bytes32)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_bytes32)dyn_storage": {
+              "label": "bytes32[]"
+            },
+            "t_bytes32": {
+              "label": "bytes32"
+            },
+            "t_mapping(t_bytes32,t_uint256)": {
+              "label": "mapping(bytes32 => uint256)"
+            },
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_struct(UintToAddressMap)2212_storage": {
+              "label": "struct EnumerableMap.UintToAddressMap",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Map)1894_storage"
+                }
+              ]
+            },
+            "t_struct(Map)1894_storage": {
+              "label": "struct EnumerableMap.Map",
+              "members": [
+                {
+                  "label": "_entries",
+                  "type": "t_array(t_struct(MapEntry)1886_storage)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_struct(MapEntry)1886_storage)dyn_storage": {
+              "label": "struct EnumerableMap.MapEntry[]"
+            },
+            "t_struct(MapEntry)1886_storage": {
+              "label": "struct EnumerableMap.MapEntry",
+              "members": [
+                {
+                  "label": "_key",
+                  "type": "t_bytes32"
+                },
+                {
+                  "label": "_value",
+                  "type": "t_bytes32"
+                }
+              ]
+            },
+            "t_mapping(t_uint256,t_address)": {
+              "label": "mapping(uint256 => address)"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_string_storage": {
+              "label": "string"
+            },
+            "t_mapping(t_uint256,t_string_storage)": {
+              "label": "mapping(uint256 => string)"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Enumerable": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Metadata": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Receiver": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Address": {
+        "version": {
+          "withMetadata": "f84b111d91cd3f4f6bde6cb7481eabb5118a78942d2f0a0b4c72f9a10d3558c3",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts/utils/Address.sol:167"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Context": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableMap": {
+        "version": {
+          "withMetadata": "4c564c78699e6425990209805eede39de2ba53c6ec25e68539709e56af473d3c",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableSet": {
+        "version": {
+          "withMetadata": "817c6f71e1935e9ef03df90332e4c662c55b721e3989358f1eb99bba197ef59a",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Strings": {
+        "version": {
+          "withMetadata": "c59e4634fdd0ffe83aba6d9c814752d7be725e5a1981b8dcb106891f9095401d",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "NiftyA": {
+        "version": {
+          "withMetadata": "868d0b2019b0cd1930c5e17d4016656fd302bb53f72a3bf376ae3b18f8478794",
+          "withoutMetadata": "76bc8081dab878d8c4b2df64ec79f78161042e533de9d56ce2966f4529ebb6a9",
+          "linkedWithoutMetadata": "76bc8081dab878d8c4b2df64ec79f78161042e533de9d56ce2966f4529ebb6a9"
+        },
+        "inherit": [
+          "ERC721",
+          "IERC721Enumerable",
+          "IERC721Metadata",
+          "IERC721",
+          "ERC165",
+          "IERC165",
+          "Context"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "NiftyA",
+            "src": "contracts/NiftyA.sol:7"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "console": {
+        "version": {
+          "withMetadata": "a6fdc3350f926fd5250c19dd1ee1a85c1bb9458dc9c8e7478988a29a1c8433f1",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      }
+    },
+    {
+      "ERC165": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC165",
+            "src": "@openzeppelin/contracts/introspection/ERC165.sol:24"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC165",
+              "label": "_supportedInterfaces",
+              "type": "t_mapping(t_bytes4,t_bool)",
+              "src": "@openzeppelin/contracts/introspection/ERC165.sol:22"
+            }
+          ],
+          "types": {
+            "t_mapping(t_bytes4,t_bool)": {
+              "label": "mapping(bytes4 => bool)"
+            },
+            "t_bytes4": {
+              "label": "bytes4"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC165": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "SafeMath": {
+        "version": {
+          "withMetadata": "d8874f05de9262765e205e30d7e3b67c86ca6e1653277253f37caf3cec510258",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "ERC721": {
+        "version": {
+          "withMetadata": "411b1ff38bb13a08b94c47bde3920d676951e26bb691d3edc417f4fb24b1fe7c",
+          "withoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1",
+          "linkedWithoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1"
+        },
+        "inherit": [
+          "IERC721Enumerable",
+          "IERC721Metadata",
+          "IERC721",
+          "ERC165",
+          "IERC165",
+          "Context"
+        ],
+        "libraries": [
+          "SafeMath",
+          "Address",
+          "EnumerableSet",
+          "EnumerableMap",
+          "Strings"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC721",
+            "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:93"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC721",
+              "label": "_holderTokens",
+              "type": "t_mapping(t_address,t_struct(UintSet)2835_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:33"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenOwners",
+              "type": "t_struct(UintToAddressMap)2212_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:36"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenApprovals",
+              "type": "t_mapping(t_uint256,t_address)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:39"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_operatorApprovals",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:42"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_name",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:45"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_symbol",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:48"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenURIs",
+              "type": "t_mapping(t_uint256,t_string_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:51"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_baseURI",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:54"
+            }
+          ],
+          "types": {
+            "t_mapping(t_address,t_struct(UintSet)2835_storage)": {
+              "label": "mapping(address => struct EnumerableSet.UintSet)"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_struct(UintSet)2835_storage": {
+              "label": "struct EnumerableSet.UintSet",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Set)2449_storage"
+                }
+              ]
+            },
+            "t_struct(Set)2449_storage": {
+              "label": "struct EnumerableSet.Set",
+              "members": [
+                {
+                  "label": "_values",
+                  "type": "t_array(t_bytes32)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_bytes32)dyn_storage": {
+              "label": "bytes32[]"
+            },
+            "t_bytes32": {
+              "label": "bytes32"
+            },
+            "t_mapping(t_bytes32,t_uint256)": {
+              "label": "mapping(bytes32 => uint256)"
+            },
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_struct(UintToAddressMap)2212_storage": {
+              "label": "struct EnumerableMap.UintToAddressMap",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Map)1894_storage"
+                }
+              ]
+            },
+            "t_struct(Map)1894_storage": {
+              "label": "struct EnumerableMap.Map",
+              "members": [
+                {
+                  "label": "_entries",
+                  "type": "t_array(t_struct(MapEntry)1886_storage)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_struct(MapEntry)1886_storage)dyn_storage": {
+              "label": "struct EnumerableMap.MapEntry[]"
+            },
+            "t_struct(MapEntry)1886_storage": {
+              "label": "struct EnumerableMap.MapEntry",
+              "members": [
+                {
+                  "label": "_key",
+                  "type": "t_bytes32"
+                },
+                {
+                  "label": "_value",
+                  "type": "t_bytes32"
+                }
+              ]
+            },
+            "t_mapping(t_uint256,t_address)": {
+              "label": "mapping(uint256 => address)"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_string_storage": {
+              "label": "string"
+            },
+            "t_mapping(t_uint256,t_string_storage)": {
+              "label": "mapping(uint256 => string)"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Enumerable": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Metadata": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Receiver": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Address": {
+        "version": {
+          "withMetadata": "f84b111d91cd3f4f6bde6cb7481eabb5118a78942d2f0a0b4c72f9a10d3558c3",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts/utils/Address.sol:167"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Context": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableMap": {
+        "version": {
+          "withMetadata": "4c564c78699e6425990209805eede39de2ba53c6ec25e68539709e56af473d3c",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableSet": {
+        "version": {
+          "withMetadata": "817c6f71e1935e9ef03df90332e4c662c55b721e3989358f1eb99bba197ef59a",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Strings": {
+        "version": {
+          "withMetadata": "c59e4634fdd0ffe83aba6d9c814752d7be725e5a1981b8dcb106891f9095401d",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "NiftyA": {
+        "version": {
+          "withMetadata": "8b0fb9822a06b5b17e7bf58cec218f9d9543b31517d6ce7fcc0e11d329e2f293",
+          "withoutMetadata": "8e55f788587aec29b9ceb3e56c16d036bcc5ba24838053081e98e4f4a80ff6a7",
+          "linkedWithoutMetadata": "8e55f788587aec29b9ceb3e56c16d036bcc5ba24838053081e98e4f4a80ff6a7"
+        },
+        "inherit": [
+          "ERC721",
+          "IERC721Enumerable",
+          "IERC721Metadata",
+          "IERC721",
+          "ERC165",
+          "IERC165",
+          "Context"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "NiftyA",
+            "src": "contracts/NiftyA.sol:7"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "console": {
+        "version": {
+          "withMetadata": "a6fdc3350f926fd5250c19dd1ee1a85c1bb9458dc9c8e7478988a29a1c8433f1",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      }
+    },
+    {
+      "ERC165": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC165",
+            "src": "@openzeppelin/contracts/introspection/ERC165.sol:24"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC165",
+              "label": "_supportedInterfaces",
+              "type": "t_mapping(t_bytes4,t_bool)",
+              "src": "@openzeppelin/contracts/introspection/ERC165.sol:22"
+            }
+          ],
+          "types": {
+            "t_mapping(t_bytes4,t_bool)": {
+              "label": "mapping(bytes4 => bool)"
+            },
+            "t_bytes4": {
+              "label": "bytes4"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC165": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "SafeMath": {
+        "version": {
+          "withMetadata": "d8874f05de9262765e205e30d7e3b67c86ca6e1653277253f37caf3cec510258",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "ERC721": {
+        "version": {
+          "withMetadata": "411b1ff38bb13a08b94c47bde3920d676951e26bb691d3edc417f4fb24b1fe7c",
+          "withoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1",
+          "linkedWithoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1"
+        },
+        "inherit": [
+          "IERC721Enumerable",
+          "IERC721Metadata",
+          "IERC721",
+          "ERC165",
+          "IERC165",
+          "Context"
+        ],
+        "libraries": [
+          "SafeMath",
+          "Address",
+          "EnumerableSet",
+          "EnumerableMap",
+          "Strings"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC721",
+            "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:93"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC721",
+              "label": "_holderTokens",
+              "type": "t_mapping(t_address,t_struct(UintSet)2835_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:33"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenOwners",
+              "type": "t_struct(UintToAddressMap)2212_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:36"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenApprovals",
+              "type": "t_mapping(t_uint256,t_address)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:39"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_operatorApprovals",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:42"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_name",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:45"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_symbol",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:48"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenURIs",
+              "type": "t_mapping(t_uint256,t_string_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:51"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_baseURI",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:54"
+            }
+          ],
+          "types": {
+            "t_mapping(t_address,t_struct(UintSet)2835_storage)": {
+              "label": "mapping(address => struct EnumerableSet.UintSet)"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_struct(UintSet)2835_storage": {
+              "label": "struct EnumerableSet.UintSet",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Set)2449_storage"
+                }
+              ]
+            },
+            "t_struct(Set)2449_storage": {
+              "label": "struct EnumerableSet.Set",
+              "members": [
+                {
+                  "label": "_values",
+                  "type": "t_array(t_bytes32)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_bytes32)dyn_storage": {
+              "label": "bytes32[]"
+            },
+            "t_bytes32": {
+              "label": "bytes32"
+            },
+            "t_mapping(t_bytes32,t_uint256)": {
+              "label": "mapping(bytes32 => uint256)"
+            },
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_struct(UintToAddressMap)2212_storage": {
+              "label": "struct EnumerableMap.UintToAddressMap",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Map)1894_storage"
+                }
+              ]
+            },
+            "t_struct(Map)1894_storage": {
+              "label": "struct EnumerableMap.Map",
+              "members": [
+                {
+                  "label": "_entries",
+                  "type": "t_array(t_struct(MapEntry)1886_storage)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_struct(MapEntry)1886_storage)dyn_storage": {
+              "label": "struct EnumerableMap.MapEntry[]"
+            },
+            "t_struct(MapEntry)1886_storage": {
+              "label": "struct EnumerableMap.MapEntry",
+              "members": [
+                {
+                  "label": "_key",
+                  "type": "t_bytes32"
+                },
+                {
+                  "label": "_value",
+                  "type": "t_bytes32"
+                }
+              ]
+            },
+            "t_mapping(t_uint256,t_address)": {
+              "label": "mapping(uint256 => address)"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_string_storage": {
+              "label": "string"
+            },
+            "t_mapping(t_uint256,t_string_storage)": {
+              "label": "mapping(uint256 => string)"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Enumerable": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Metadata": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Receiver": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Address": {
+        "version": {
+          "withMetadata": "f84b111d91cd3f4f6bde6cb7481eabb5118a78942d2f0a0b4c72f9a10d3558c3",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts/utils/Address.sol:167"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Context": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableMap": {
+        "version": {
+          "withMetadata": "4c564c78699e6425990209805eede39de2ba53c6ec25e68539709e56af473d3c",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableSet": {
+        "version": {
+          "withMetadata": "817c6f71e1935e9ef03df90332e4c662c55b721e3989358f1eb99bba197ef59a",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Strings": {
+        "version": {
+          "withMetadata": "c59e4634fdd0ffe83aba6d9c814752d7be725e5a1981b8dcb106891f9095401d",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "NiftyA": {
+        "version": {
+          "withMetadata": "2b65efc6ef69318e2bbae9e199315f68fd74e4cd456e8d9d6e2dafe0a9e08105",
+          "withoutMetadata": "1d3a8f3e41cce7d63f44094b7038945849d4cb92621b33f1b5c60327cedc4365",
+          "linkedWithoutMetadata": "1d3a8f3e41cce7d63f44094b7038945849d4cb92621b33f1b5c60327cedc4365"
+        },
+        "inherit": [
+          "ERC721",
+          "IERC721Enumerable",
+          "IERC721Metadata",
+          "IERC721",
+          "ERC165",
+          "IERC165",
+          "Context"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "NiftyA",
+            "src": "contracts/NiftyA.sol:7"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "console": {
+        "version": {
+          "withMetadata": "a6fdc3350f926fd5250c19dd1ee1a85c1bb9458dc9c8e7478988a29a1c8433f1",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      }
+    },
+    {
+      "ERC165": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC165",
+            "src": "@openzeppelin/contracts/introspection/ERC165.sol:24"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC165",
+              "label": "_supportedInterfaces",
+              "type": "t_mapping(t_bytes4,t_bool)",
+              "src": "@openzeppelin/contracts/introspection/ERC165.sol:22"
+            }
+          ],
+          "types": {
+            "t_mapping(t_bytes4,t_bool)": {
+              "label": "mapping(bytes4 => bool)"
+            },
+            "t_bytes4": {
+              "label": "bytes4"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC165": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "SafeMath": {
+        "version": {
+          "withMetadata": "d8874f05de9262765e205e30d7e3b67c86ca6e1653277253f37caf3cec510258",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "ERC721": {
+        "version": {
+          "withMetadata": "411b1ff38bb13a08b94c47bde3920d676951e26bb691d3edc417f4fb24b1fe7c",
+          "withoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1",
+          "linkedWithoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1"
+        },
+        "inherit": [
+          "IERC721Enumerable",
+          "IERC721Metadata",
+          "IERC721",
+          "ERC165",
+          "IERC165",
+          "Context"
+        ],
+        "libraries": [
+          "SafeMath",
+          "Address",
+          "EnumerableSet",
+          "EnumerableMap",
+          "Strings"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC721",
+            "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:93"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC721",
+              "label": "_holderTokens",
+              "type": "t_mapping(t_address,t_struct(UintSet)2835_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:33"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenOwners",
+              "type": "t_struct(UintToAddressMap)2212_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:36"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenApprovals",
+              "type": "t_mapping(t_uint256,t_address)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:39"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_operatorApprovals",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:42"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_name",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:45"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_symbol",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:48"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenURIs",
+              "type": "t_mapping(t_uint256,t_string_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:51"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_baseURI",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:54"
+            }
+          ],
+          "types": {
+            "t_mapping(t_address,t_struct(UintSet)2835_storage)": {
+              "label": "mapping(address => struct EnumerableSet.UintSet)"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_struct(UintSet)2835_storage": {
+              "label": "struct EnumerableSet.UintSet",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Set)2449_storage"
+                }
+              ]
+            },
+            "t_struct(Set)2449_storage": {
+              "label": "struct EnumerableSet.Set",
+              "members": [
+                {
+                  "label": "_values",
+                  "type": "t_array(t_bytes32)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_bytes32)dyn_storage": {
+              "label": "bytes32[]"
+            },
+            "t_bytes32": {
+              "label": "bytes32"
+            },
+            "t_mapping(t_bytes32,t_uint256)": {
+              "label": "mapping(bytes32 => uint256)"
+            },
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_struct(UintToAddressMap)2212_storage": {
+              "label": "struct EnumerableMap.UintToAddressMap",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Map)1894_storage"
+                }
+              ]
+            },
+            "t_struct(Map)1894_storage": {
+              "label": "struct EnumerableMap.Map",
+              "members": [
+                {
+                  "label": "_entries",
+                  "type": "t_array(t_struct(MapEntry)1886_storage)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_struct(MapEntry)1886_storage)dyn_storage": {
+              "label": "struct EnumerableMap.MapEntry[]"
+            },
+            "t_struct(MapEntry)1886_storage": {
+              "label": "struct EnumerableMap.MapEntry",
+              "members": [
+                {
+                  "label": "_key",
+                  "type": "t_bytes32"
+                },
+                {
+                  "label": "_value",
+                  "type": "t_bytes32"
+                }
+              ]
+            },
+            "t_mapping(t_uint256,t_address)": {
+              "label": "mapping(uint256 => address)"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_string_storage": {
+              "label": "string"
+            },
+            "t_mapping(t_uint256,t_string_storage)": {
+              "label": "mapping(uint256 => string)"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Enumerable": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Metadata": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Receiver": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Address": {
+        "version": {
+          "withMetadata": "f84b111d91cd3f4f6bde6cb7481eabb5118a78942d2f0a0b4c72f9a10d3558c3",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts/utils/Address.sol:167"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Context": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableMap": {
+        "version": {
+          "withMetadata": "4c564c78699e6425990209805eede39de2ba53c6ec25e68539709e56af473d3c",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableSet": {
+        "version": {
+          "withMetadata": "817c6f71e1935e9ef03df90332e4c662c55b721e3989358f1eb99bba197ef59a",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Strings": {
+        "version": {
+          "withMetadata": "c59e4634fdd0ffe83aba6d9c814752d7be725e5a1981b8dcb106891f9095401d",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "NiftyA": {
+        "inherit": [
+          "ERC721",
+          "IERC721Enumerable",
+          "IERC721Metadata",
+          "IERC721",
+          "ERC165",
+          "IERC165",
+          "Context"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "NiftyA",
+            "src": "contracts/NiftyA.sol:7"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "console": {
+        "version": {
+          "withMetadata": "a6fdc3350f926fd5250c19dd1ee1a85c1bb9458dc9c8e7478988a29a1c8433f1",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      }
+    },
+    {
+      "ERC165": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC165",
+            "src": "@openzeppelin/contracts/introspection/ERC165.sol:24"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC165",
+              "label": "_supportedInterfaces",
+              "type": "t_mapping(t_bytes4,t_bool)",
+              "src": "@openzeppelin/contracts/introspection/ERC165.sol:22"
+            }
+          ],
+          "types": {
+            "t_mapping(t_bytes4,t_bool)": {
+              "label": "mapping(bytes4 => bool)"
+            },
+            "t_bytes4": {
+              "label": "bytes4"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC165": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "SafeMath": {
+        "version": {
+          "withMetadata": "d8874f05de9262765e205e30d7e3b67c86ca6e1653277253f37caf3cec510258",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "ERC721": {
+        "version": {
+          "withMetadata": "411b1ff38bb13a08b94c47bde3920d676951e26bb691d3edc417f4fb24b1fe7c",
+          "withoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1",
+          "linkedWithoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1"
+        },
+        "inherit": [
+          "IERC721Enumerable",
+          "IERC721Metadata",
+          "IERC721",
+          "ERC165",
+          "IERC165",
+          "Context"
+        ],
+        "libraries": [
+          "SafeMath",
+          "Address",
+          "EnumerableSet",
+          "EnumerableMap",
+          "Strings"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC721",
+            "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:93"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC721",
+              "label": "_holderTokens",
+              "type": "t_mapping(t_address,t_struct(UintSet)2835_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:33"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenOwners",
+              "type": "t_struct(UintToAddressMap)2212_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:36"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenApprovals",
+              "type": "t_mapping(t_uint256,t_address)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:39"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_operatorApprovals",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:42"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_name",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:45"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_symbol",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:48"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenURIs",
+              "type": "t_mapping(t_uint256,t_string_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:51"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_baseURI",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:54"
+            }
+          ],
+          "types": {
+            "t_mapping(t_address,t_struct(UintSet)2835_storage)": {
+              "label": "mapping(address => struct EnumerableSet.UintSet)"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_struct(UintSet)2835_storage": {
+              "label": "struct EnumerableSet.UintSet",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Set)2449_storage"
+                }
+              ]
+            },
+            "t_struct(Set)2449_storage": {
+              "label": "struct EnumerableSet.Set",
+              "members": [
+                {
+                  "label": "_values",
+                  "type": "t_array(t_bytes32)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_bytes32)dyn_storage": {
+              "label": "bytes32[]"
+            },
+            "t_bytes32": {
+              "label": "bytes32"
+            },
+            "t_mapping(t_bytes32,t_uint256)": {
+              "label": "mapping(bytes32 => uint256)"
+            },
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_struct(UintToAddressMap)2212_storage": {
+              "label": "struct EnumerableMap.UintToAddressMap",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Map)1894_storage"
+                }
+              ]
+            },
+            "t_struct(Map)1894_storage": {
+              "label": "struct EnumerableMap.Map",
+              "members": [
+                {
+                  "label": "_entries",
+                  "type": "t_array(t_struct(MapEntry)1886_storage)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_struct(MapEntry)1886_storage)dyn_storage": {
+              "label": "struct EnumerableMap.MapEntry[]"
+            },
+            "t_struct(MapEntry)1886_storage": {
+              "label": "struct EnumerableMap.MapEntry",
+              "members": [
+                {
+                  "label": "_key",
+                  "type": "t_bytes32"
+                },
+                {
+                  "label": "_value",
+                  "type": "t_bytes32"
+                }
+              ]
+            },
+            "t_mapping(t_uint256,t_address)": {
+              "label": "mapping(uint256 => address)"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_string_storage": {
+              "label": "string"
+            },
+            "t_mapping(t_uint256,t_string_storage)": {
+              "label": "mapping(uint256 => string)"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Enumerable": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Metadata": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Receiver": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Address": {
+        "version": {
+          "withMetadata": "f84b111d91cd3f4f6bde6cb7481eabb5118a78942d2f0a0b4c72f9a10d3558c3",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts/utils/Address.sol:167"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Context": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableMap": {
+        "version": {
+          "withMetadata": "4c564c78699e6425990209805eede39de2ba53c6ec25e68539709e56af473d3c",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableSet": {
+        "version": {
+          "withMetadata": "817c6f71e1935e9ef03df90332e4c662c55b721e3989358f1eb99bba197ef59a",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Strings": {
+        "version": {
+          "withMetadata": "c59e4634fdd0ffe83aba6d9c814752d7be725e5a1981b8dcb106891f9095401d",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "NiftyA": {
+        "version": {
+          "withMetadata": "7a6d7761b0c68e9873283f18a92561a324db05341b171d2833fea7934c2a8ba8",
+          "withoutMetadata": "148e65217a4e8db6bb375443e34fe700ba49973dd14863bdeed894195759b1b1",
+          "linkedWithoutMetadata": "148e65217a4e8db6bb375443e34fe700ba49973dd14863bdeed894195759b1b1"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "state-variable-assignment",
+            "name": "lol",
+            "src": "contracts/NiftyA.sol:6"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "NiftyA",
+              "label": "lol",
+              "type": "t_uint256",
+              "src": "contracts/NiftyA.sol:6"
+            }
+          ],
+          "types": {
+            "t_uint256": {
+              "label": "uint256"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      }
+    },
+    {
+      "ERC165": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC165",
+            "src": "@openzeppelin/contracts/introspection/ERC165.sol:24"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC165",
+              "label": "_supportedInterfaces",
+              "type": "t_mapping(t_bytes4,t_bool)",
+              "src": "@openzeppelin/contracts/introspection/ERC165.sol:22"
+            }
+          ],
+          "types": {
+            "t_mapping(t_bytes4,t_bool)": {
+              "label": "mapping(bytes4 => bool)"
+            },
+            "t_bytes4": {
+              "label": "bytes4"
+            },
+            "t_bool": {
+              "label": "bool"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC165": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "SafeMath": {
+        "version": {
+          "withMetadata": "d8874f05de9262765e205e30d7e3b67c86ca6e1653277253f37caf3cec510258",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "ERC721": {
+        "version": {
+          "withMetadata": "411b1ff38bb13a08b94c47bde3920d676951e26bb691d3edc417f4fb24b1fe7c",
+          "withoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1",
+          "linkedWithoutMetadata": "7ca9d353af00471885f37f61ecc97805a11d630b3f4ed17ca4e8df1ae7c708f1"
+        },
+        "inherit": [
+          "IERC721Enumerable",
+          "IERC721Metadata",
+          "IERC721",
+          "ERC165",
+          "IERC165",
+          "Context"
+        ],
+        "libraries": [
+          "SafeMath",
+          "Address",
+          "EnumerableSet",
+          "EnumerableMap",
+          "Strings"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ERC721",
+            "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:93"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "ERC721",
+              "label": "_holderTokens",
+              "type": "t_mapping(t_address,t_struct(UintSet)2835_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:33"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenOwners",
+              "type": "t_struct(UintToAddressMap)2212_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:36"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenApprovals",
+              "type": "t_mapping(t_uint256,t_address)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:39"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_operatorApprovals",
+              "type": "t_mapping(t_address,t_mapping(t_address,t_bool))",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:42"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_name",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:45"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_symbol",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:48"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_tokenURIs",
+              "type": "t_mapping(t_uint256,t_string_storage)",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:51"
+            },
+            {
+              "contract": "ERC721",
+              "label": "_baseURI",
+              "type": "t_string_storage",
+              "src": "@openzeppelin/contracts/token/ERC721/ERC721.sol:54"
+            }
+          ],
+          "types": {
+            "t_mapping(t_address,t_struct(UintSet)2835_storage)": {
+              "label": "mapping(address => struct EnumerableSet.UintSet)"
+            },
+            "t_address": {
+              "label": "address"
+            },
+            "t_struct(UintSet)2835_storage": {
+              "label": "struct EnumerableSet.UintSet",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Set)2449_storage"
+                }
+              ]
+            },
+            "t_struct(Set)2449_storage": {
+              "label": "struct EnumerableSet.Set",
+              "members": [
+                {
+                  "label": "_values",
+                  "type": "t_array(t_bytes32)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_bytes32)dyn_storage": {
+              "label": "bytes32[]"
+            },
+            "t_bytes32": {
+              "label": "bytes32"
+            },
+            "t_mapping(t_bytes32,t_uint256)": {
+              "label": "mapping(bytes32 => uint256)"
+            },
+            "t_uint256": {
+              "label": "uint256"
+            },
+            "t_struct(UintToAddressMap)2212_storage": {
+              "label": "struct EnumerableMap.UintToAddressMap",
+              "members": [
+                {
+                  "label": "_inner",
+                  "type": "t_struct(Map)1894_storage"
+                }
+              ]
+            },
+            "t_struct(Map)1894_storage": {
+              "label": "struct EnumerableMap.Map",
+              "members": [
+                {
+                  "label": "_entries",
+                  "type": "t_array(t_struct(MapEntry)1886_storage)dyn_storage"
+                },
+                {
+                  "label": "_indexes",
+                  "type": "t_mapping(t_bytes32,t_uint256)"
+                }
+              ]
+            },
+            "t_array(t_struct(MapEntry)1886_storage)dyn_storage": {
+              "label": "struct EnumerableMap.MapEntry[]"
+            },
+            "t_struct(MapEntry)1886_storage": {
+              "label": "struct EnumerableMap.MapEntry",
+              "members": [
+                {
+                  "label": "_key",
+                  "type": "t_bytes32"
+                },
+                {
+                  "label": "_value",
+                  "type": "t_bytes32"
+                }
+              ]
+            },
+            "t_mapping(t_uint256,t_address)": {
+              "label": "mapping(uint256 => address)"
+            },
+            "t_mapping(t_address,t_mapping(t_address,t_bool))": {
+              "label": "mapping(address => mapping(address => bool))"
+            },
+            "t_mapping(t_address,t_bool)": {
+              "label": "mapping(address => bool)"
+            },
+            "t_bool": {
+              "label": "bool"
+            },
+            "t_string_storage": {
+              "label": "string"
+            },
+            "t_mapping(t_uint256,t_string_storage)": {
+              "label": "mapping(uint256 => string)"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721": {
+        "inherit": [
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Enumerable": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Metadata": {
+        "inherit": [
+          "IERC721",
+          "IERC165"
+        ],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "IERC721Receiver": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Address": {
+        "version": {
+          "withMetadata": "f84b111d91cd3f4f6bde6cb7481eabb5118a78942d2f0a0b4c72f9a10d3558c3",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "delegatecall",
+            "src": "@openzeppelin/contracts/utils/Address.sol:167"
+          }
+        ],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Context": {
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableMap": {
+        "version": {
+          "withMetadata": "4c564c78699e6425990209805eede39de2ba53c6ec25e68539709e56af473d3c",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "EnumerableSet": {
+        "version": {
+          "withMetadata": "817c6f71e1935e9ef03df90332e4c662c55b721e3989358f1eb99bba197ef59a",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "Strings": {
+        "version": {
+          "withMetadata": "c59e4634fdd0ffe83aba6d9c814752d7be725e5a1981b8dcb106891f9095401d",
+          "withoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8",
+          "linkedWithoutMetadata": "aaa148c474cd10e1a6cd0a52c0b55f1aa9b7bb7b42d7f1cb5acaea4f42f04bc8"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.1"
+        }
+      },
+      "NiftyA": {
+        "version": {
+          "withMetadata": "7a6d7761b0c68e9873283f18a92561a324db05341b171d2833fea7934c2a8ba8",
+          "withoutMetadata": "148e65217a4e8db6bb375443e34fe700ba49973dd14863bdeed894195759b1b1",
+          "linkedWithoutMetadata": "148e65217a4e8db6bb375443e34fe700ba49973dd14863bdeed894195759b1b1"
+        },
+        "inherit": [],
+        "libraries": [],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "state-variable-assignment",
+            "name": "lol",
+            "src": "contracts/NiftyA.sol:6"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "contract": "NiftyA",
+              "label": "lol",
+              "type": "t_uint256",
+              "src": "contracts/NiftyA.sol:6"
+            }
+          ],
+          "types": {
+            "t_uint256": {
+              "label": "uint256"
+            }
+          },
+          "layoutVersion": "1.1"
+        }
+      }
+    }
+  ]
+}
