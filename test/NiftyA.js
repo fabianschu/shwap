@@ -1,3 +1,4 @@
+const { deployments } = require("hardhat");
 const chai = require("chai");
 const { solidity } = require("ethereum-waffle");
 
@@ -6,11 +7,15 @@ chai.use(solidity);
 const { expect } = chai;
 
 describe("NiftyA contract", async () => {
-  it("mints a token to Alice", async function () {
-    const [owner, alice, bob] = await ethers.getSigners();
-    const niftyA = await ethers.getContractFactory("NiftyA");
-    const niftyAInstance = await niftyA.deploy();
-    await niftyAInstance._mint(alice.address, 1);
-    expect(await niftyAInstance.balanceOf(alice.address)).to.equal(1);
+  beforeEach(async () => {
+    await deployments.fixture();
+  });
+
+  it("mints a token to the owner", async function () {
+    const { owner, alice, bob } = await getNamedAccounts();
+    const niftyAInstance = await ethers.getContract("NiftyA", owner);
+    const ownerBalance = await niftyAInstance.balanceOf(owner);
+
+    expect(ownerBalance).to.equal(1);
   });
 });

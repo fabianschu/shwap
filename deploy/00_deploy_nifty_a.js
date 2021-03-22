@@ -1,9 +1,9 @@
 module.exports = async ({ getNamedAccounts, deployments }) => {
   const { deploy } = deployments;
-  const { deployer } = await getNamedAccounts();
+  const { owner } = await getNamedAccounts();
 
   await deploy("NiftyA", {
-    from: deployer,
+    from: owner,
     args: [],
     log: true,
   });
