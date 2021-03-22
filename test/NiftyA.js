@@ -30,4 +30,18 @@ describe("NiftyA contract", async () => {
     expect(bobBalance).to.equal(1);
     expect(await niftyAInstance.ownerOf(1)).to.equal(bob.address);
   });
+
+  it("lets owner authorize alice to transfer", async function () {
+    const [owner, alice, bob] = await ethers.getSigners();
+    const niftyAInstance = await ethers.getContract("NiftyA", owner.address);
+    await niftyAInstance.approve(alice.address, 1);
+    expect(await niftyAInstance.balanceOf(owner.address)).to.equal(1);
+    await niftyAInstance
+      .connect(alice)
+      .transferFrom(owner.address, bob.address, 1);
+
+    const bobBalance = await niftyAInstance.balanceOf(bob.address);
+    expect(bobBalance).to.equal(2);
+    expect(await niftyAInstance.ownerOf(1)).to.equal(bob.address);
+  });
 });
