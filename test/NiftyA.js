@@ -41,7 +41,7 @@ describe("NiftyA contract", async () => {
       .transferFrom(owner.address, bob.address, 1);
 
     const bobBalance = await niftyAInstance.balanceOf(bob.address);
-    expect(bobBalance).to.equal(2);
+    expect(bobBalance).to.equal(1);
     expect(await niftyAInstance.ownerOf(1)).to.equal(bob.address);
   });
 });

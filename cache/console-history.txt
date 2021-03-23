@@ -1,3 +1,29 @@
+deployments.get("NiftyA")
+await deployments.get("NiftyA")
+await deployments.get("Shwap")
+deploy
+await deployments.all()
+deployments
+await deployments.get()
+deployments.get
+deployments.get()
+deployments
+this
+hre
+bob
+accounts
+owner
+contractAddress.signer.address
+contractAddress.signer
+contractAddress
+contractAddress.address
+contractAddress
+let contractAddress = await ethers.getContractFactory("Shwap")
+await ethers.getContractFactory("Shwap")
+await getContractFactory("Shwap")
+ethers
+accounts
+ethers
 await niftya.balanceOf(owner.address)
 const niftya = await nA.deploy();
 let nA = await ethers.getContractFactory("NiftyA");

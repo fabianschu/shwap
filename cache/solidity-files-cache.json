@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/fabianscherer/Documents/GitHub/Privat/shwifty-shwap/contracts/NiftyA.sol": {
-      "lastModificationDate": 1616450980425,
-      "contentHash": "2a1a1951bf1660d36aba4dabd439966d",
+      "lastModificationDate": 1616536238397,
+      "contentHash": "080f92f58de874b54d64c7636c8ffd39",
       "sourceName": "contracts/NiftyA.sol",
       "solcConfig": {
         "version": "0.7.6",
@@ -697,6 +697,50 @@
       ],
       "artifacts": [
         "NiftyB"
+      ]
+    },
+    "/Users/fabianscherer/Documents/GitHub/Privat/shwifty-shwap/contracts/Shwap.sol": {
+      "lastModificationDate": 1616536321039,
+      "contentHash": "41fc5c10f4b5ea8e0ac8e07db71f5d31",
+      "sourceName": "contracts/Shwap.sol",
+      "solcConfig": {
+        "version": "0.7.6",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "hardhat/console.sol"
+      ],
+      "versionPragmas": [
+        "^0.7.6"
+      ],
+      "artifacts": [
+        "Shwap"
       ]
     }
   }

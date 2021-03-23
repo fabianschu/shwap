@@ -7,4 +7,9 @@ contract NiftyA is ERC721 {
   constructor() ERC721("lol", "LOL")  {
     _mint(msg.sender, 1);
   }
+
+  function doSomething() public {
+    console.log("NiftyA > doSomething > msg.sender >");
+    console.log(msg.sender);
+  }
 }
