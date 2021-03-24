@@ -31,6 +31,15 @@ describe("NiftyA contract", async () => {
     expect(await niftyAInstance.ownerOf(1)).to.equal(bob.address);
   });
 
+  it("emits an event when alice gets approved", async function () {
+    const [owner, alice, bob] = await ethers.getSigners();
+    const niftyAInstance = await ethers.getContract("NiftyA", owner.address);
+    await expect(niftyAInstance.approve(alice.address, 1)).to.emit(
+      niftyAInstance,
+      "Approval"
+    );
+  });
+
   it("lets owner authorize alice to transfer", async function () {
     const [owner, alice, bob] = await ethers.getSigners();
     const niftyAInstance = await ethers.getContract("NiftyA", owner.address);
