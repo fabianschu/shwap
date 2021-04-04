@@ -8,8 +8,14 @@ contract NiftyA is ERC721 {
     _mint(msg.sender, 1);
   }
 
-  function doSomething() public {
+  function doSomething(address _to, uint256 _tokenId) external {
+    console.log("__");
     console.log("NiftyA > doSomething > msg.sender >");
     console.log(msg.sender);
+    console.log("NiftyA > doSomething > _to >");
+    console.log(_to);
+    console.log("NiftyA > doSomething > _tokenId >");
+    console.log(_tokenId);
+    console.log("__");
   }
 }
