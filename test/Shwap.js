@@ -64,8 +64,46 @@ describe("Specs: Shwap contract", async () => {
     });
 
     it("increments the idCounter", async () => {
-      const id = await shwapInstance.idCounter();
-      expect(BigNumber.from(id)).to.be.equal(BigNumber.from(1));
+      const nextId = await shwapInstance.idCounter();
+      expect(BigNumber.from(nextId)).to.be.equal(BigNumber.from(1));
+    });
+
+    describe("data storage", async () => {
+      let proposerAddress,
+        proposerTokenAddress,
+        searchedTokenAddress,
+        proposerTokenId,
+        searchedTokenId;
+
+      beforeEach(async () => {
+        [
+          proposerAddress,
+          proposerTokenAddress,
+          searchedTokenAddress,
+          proposerTokenId,
+          searchedTokenId,
+        ] = await shwapInstance.proposals(0);
+      });
+
+      it("proposerAddress is address of owner", async () => {
+        expect(proposerAddress).to.equal(owner.address);
+      });
+
+      it("proposerTokenAddress is address of NiftyA", async () => {
+        expect(proposerTokenAddress).to.equal(niftyAInstance.address);
+      });
+
+      it("searchedTokenAddress is address of NiftyB", async () => {
+        expect(searchedTokenAddress).to.equal(niftyBInstance.address);
+      });
+
+      it("proposerTokenId is 1", async () => {
+        expect(BigNumber.from(proposerTokenId)).to.be.equal(BigNumber.from(1));
+      });
+
+      it("searchedTokenId is 2", async () => {
+        expect(BigNumber.from(searchedTokenId)).to.be.equal(BigNumber.from(2));
+      });
     });
   });
 });
