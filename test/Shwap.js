@@ -51,7 +51,7 @@ describe("Specs: TestShwap contract", async () => {
     });
   });
 
-  describe("#isApproved", async () => {
+  describe("#_isApproved", async () => {
     it("with approval emits ApprovalConfirmation event", async () => {
       niftyAInstance = await ethers.getContract("NiftyA", owner.address);
       await niftyAInstance.approve(shwapInstance.address, 1);
@@ -68,6 +68,52 @@ describe("Specs: TestShwap contract", async () => {
         1
       );
       expect(isApproved).not.to.emit(shwapInstance, "ApprovalConfirmation");
+    });
+  });
+
+  describe("#_isAllApproved", async () => {
+    beforeEach(async () => {
+      niftyAInstance = await ethers.getContract("NiftyA", owner.address);
+      niftyBInstance = await ethers.getContract("NiftyB", alice.address);
+    });
+
+    it("with all approvals emits AllApprovalConfirmation event", async () => {
+      await niftyAInstance.approve(shwapInstance.address, 1);
+      await niftyBInstance.approve(shwapInstance.address, 2);
+      const isAllApproved = await shwapInstance._isAllApproved(
+        niftyAInstance.address,
+        niftyBInstance.address,
+        1,
+        2
+      );
+      expect(isAllApproved).to.emit(shwapInstance, "AllApprovalConfirmation");
+    });
+
+    it("with only one approval doesn't emit AllApprovalConfirmation event", async () => {
+      await niftyBInstance.approve(shwapInstance.address, 2);
+      const isAllApproved = await shwapInstance._isAllApproved(
+        niftyAInstance.address,
+        niftyBInstance.address,
+        1,
+        2
+      );
+      expect(isAllApproved).not.to.emit(
+        shwapInstance,
+        "AllApprovalConfirmation"
+      );
+    });
+
+    it("without approval doesnt emit event", async () => {
+      const isAllApproved = await shwapInstance._isAllApproved(
+        niftyAInstance.address,
+        niftyBInstance.address,
+        1,
+        2
+      );
+      expect(isAllApproved).not.to.emit(
+        shwapInstance,
+        "AllApprovalConfirmation"
+      );
     });
   });
 

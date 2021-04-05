@@ -13,11 +13,6 @@ contract Shwap {
     uint counterpartTokenId
   );
 
-  event ApprovalConfirmation(
-    address tokenAddress,
-    uint tokenId
-  );
-
   struct Proposal {
     address proposerAddress;
     address proposerTokenAddress;
@@ -53,12 +48,28 @@ contract Shwap {
   }
 
   function acceptProposal(
-    uint id
+    uint _id
   ) public {
     // check if transfer is possible for both items
+    bool approvalsConfirmed = isAllApproved(
+      proposals[_id].proposerTokenAddress,
+      proposals[_id].counterpartTokenAddress,
+      proposals[_id].proposerTokenId,
+      proposals[_id].counterpartTokenId
+    );
+    require(approvalsConfirmed, "Insufficient approvals");
     // do both transfers
     // remove proposal from proposals
     // take last proposal and put it in new gap, adapt counter, emit event
+  }
+
+  function isAllApproved(
+    address _proposerTokenAddress,
+    address _counterpartTokenAddress,
+    uint _proposerTokenId,
+    uint _counterpartTokenId
+  ) internal returns(bool) {
+    return isApproved(_proposerTokenAddress, _proposerTokenId) && isApproved(_counterpartTokenAddress, _counterpartTokenId);
   }
 
   function isApproved(
@@ -75,10 +86,7 @@ contract Shwap {
       )
     );
     (address approvedAddress) = abi.decode(data, (address));
-    bool approval = approvedAddress == address(this);
-    if(!approval) return false;
-    emit ApprovalConfirmation(_tokenAddress, _tokenId);
-    return true;
+    return approvedAddress == address(this);
   }
 
   function transfer(
