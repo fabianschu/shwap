@@ -5,6 +5,7 @@ import "./Shwap.sol";
 contract TestShwap is Shwap {
   event ApprovalConfirmation();
   event AllApprovalConfirmation();
+  event OwnershipConfirmation();
 
 
   function _transfer(
@@ -22,6 +23,15 @@ contract TestShwap is Shwap {
   ) public {
     if (isApproved(_tokenAddress, _tokenId)) {
       emit ApprovalConfirmation();
+    }
+  }
+
+  function _isOwner(
+    address _tokenAddress,
+    uint _tokenId
+  ) public {
+    if (isOwner(_tokenAddress, _tokenId)) {
+      emit OwnershipConfirmation();
     }
   }
 

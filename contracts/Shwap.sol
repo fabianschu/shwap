@@ -50,6 +50,8 @@ contract Shwap {
   function acceptProposal(
     uint _id
   ) public {
+    // check if acceptor is counterpart
+    // require(msg.sender == )
     // check if transfer is possible for both items
     bool approvalsConfirmed = isAllApproved(
       proposals[_id].proposerTokenAddress,
@@ -59,8 +61,33 @@ contract Shwap {
     );
     require(approvalsConfirmed, "Insufficient approvals");
     // do both transfers
+    // bool proposerTransfer = transfer(
+    //   proposals[_id].proposerTokenAddress,
+    //   proposals[_id].proposerTokenAddress,
+    // )
+    //     address _tokenAddress,
+    // address _fromAddress,
+    // address _toAddress,
+    // uint _tokenId
     // remove proposal from proposals
     // take last proposal and put it in new gap, adapt counter, emit event
+  }
+
+  function isOwner(
+    address _tokenAddress,
+    uint _tokenId
+  ) internal returns(bool) {
+    (
+      bool success,
+      bytes memory data
+    ) = _tokenAddress.call(
+      abi.encodeWithSignature(
+        "ownerOf(uint256)",
+        _tokenId
+      )
+    );
+    (address ownerAddress) = abi.decode(data, (address));
+    return ownerAddress == msg.sender;
   }
 
   function isAllApproved(
@@ -69,7 +96,8 @@ contract Shwap {
     uint _proposerTokenId,
     uint _counterpartTokenId
   ) internal returns(bool) {
-    return isApproved(_proposerTokenAddress, _proposerTokenId) && isApproved(_counterpartTokenAddress, _counterpartTokenId);
+    return isApproved(_proposerTokenAddress, _proposerTokenId)
+      && isApproved(_counterpartTokenAddress, _counterpartTokenId);
   }
 
   function isApproved(

@@ -15,7 +15,7 @@ describe("Specs: TestShwap contract", async () => {
 
   beforeEach(async () => {
     await deployments.fixture();
-    [owner, alice] = await ethers.getSigners();
+    [owner, alice, bob] = await ethers.getSigners();
     shwapInstance = await ethers.getContract("TestShwap", owner.address);
   });
 
@@ -48,6 +48,60 @@ describe("Specs: TestShwap contract", async () => {
           .to.emit(niftyAInstance, "Transfer")
           .withArgs(owner.address, alice.address, 1);
       });
+    });
+  });
+
+  describe("#acceptProposal", async () => {
+    beforeEach(async () => {
+      niftyAInstance = await ethers.getContract("NiftyA", owner.address);
+      niftyBInstance = await ethers.getContract("NiftyB", alice.address);
+    });
+
+    it("without approvals reverts transaction", async () => {
+      addProposal = await shwapInstance.addProposal(
+        niftyAInstance.address,
+        niftyBInstance.address,
+        1,
+        2
+      );
+      const acceptProposal = shwapInstance.connect(alice).acceptProposal(0);
+      await expect(acceptProposal).to.be.revertedWith("Insufficient approvals");
+    });
+
+    // it("with caller not being the counterpart reverts transaction", async () => {
+    //   addProposal = await shwapInstance.addProposal(
+    //     niftyAInstance.address,
+    //     niftyBInstance.address,
+    //     1,
+    //     2
+    //   );
+    //   const acceptProposal = shwapInstance.connect(bob).acceptProposal(0);
+    //   await expect(acceptProposal).to.be.revertedWith("Not authorized");
+    // });
+  });
+
+  describe("#_isOwner", async () => {
+    beforeEach(async () => {
+      niftyAInstance = await ethers.getContract("NiftyA", owner.address);
+      niftyBInstance = await ethers.getContract("NiftyB", alice.address);
+      await shwapInstance.addProposal(
+        niftyAInstance.address,
+        niftyBInstance.address,
+        1,
+        2
+      );
+    });
+
+    it("when caller is owner of counterpart token, emits OwnershipConfirmation event", async () => {
+      const isOwner = await shwapInstance._isOwner(niftyBInstance.address, 2);
+      expect(isOwner).to.emit(shwapInstance, "OwnershipConfirmation");
+    });
+
+    it("when NOT owner, doesn't emit OwnershipConfirmation event", async () => {
+      const isOwner = await shwapInstance
+        .connect(owner)
+        ._isOwner(niftyBInstance.address, 2);
+      expect(isOwner).not.to.emit(shwapInstance, "OwnershipConfirmation");
     });
   });
 
