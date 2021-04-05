@@ -19,7 +19,7 @@ describe("Specs: TestShwap contract", async () => {
     shwapInstance = await ethers.getContract("TestShwap", owner.address);
   });
 
-  describe("#_transfer", async () => {
+  describe("#transfer", async () => {
     describe("with approval", async () => {
       beforeEach(async () => {
         niftyAInstance = await ethers.getContract("NiftyA", owner.address);
@@ -48,6 +48,26 @@ describe("Specs: TestShwap contract", async () => {
           .to.emit(niftyAInstance, "Transfer")
           .withArgs(owner.address, alice.address, 1);
       });
+    });
+  });
+
+  describe("#isApproved", async () => {
+    it("with approval emits ApprovalConfirmation event", async () => {
+      niftyAInstance = await ethers.getContract("NiftyA", owner.address);
+      await niftyAInstance.approve(shwapInstance.address, 1);
+      const isApproved = await shwapInstance._isApproved(
+        niftyAInstance.address,
+        1
+      );
+      expect(isApproved).to.emit(shwapInstance, "ApprovalConfirmation");
+    });
+
+    it("without approval doesnt emit event", async () => {
+      const isApproved = await shwapInstance._isApproved(
+        niftyAInstance.address,
+        1
+      );
+      expect(isApproved).not.to.emit(shwapInstance, "ApprovalConfirmation");
     });
   });
 

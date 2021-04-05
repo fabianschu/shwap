@@ -13,6 +13,11 @@ contract Shwap {
     uint counterpartTokenId
   );
 
+  event ApprovalConfirmation(
+    address tokenAddress,
+    uint tokenId
+  );
+
   struct Proposal {
     address proposerAddress;
     address proposerTokenAddress;
@@ -50,10 +55,30 @@ contract Shwap {
   function acceptProposal(
     uint id
   ) public {
-    // check if transfer ispossible for both items
+    // check if transfer is possible for both items
     // do both transfers
     // remove proposal from proposals
     // take last proposal and put it in new gap, adapt counter, emit event
+  }
+
+  function isApproved(
+    address _tokenAddress,
+    uint _tokenId
+  ) internal returns(bool) {
+    (
+      bool success,
+      bytes memory data
+    ) = _tokenAddress.call(
+      abi.encodeWithSignature(
+        "getApproved(uint256)",
+        _tokenId
+      )
+    );
+    (address approvedAddress) = abi.decode(data, (address));
+    bool approval = approvedAddress == address(this);
+    if(!approval) return false;
+    emit ApprovalConfirmation(_tokenAddress, _tokenId);
+    return true;
   }
 
   function transfer(
@@ -61,7 +86,7 @@ contract Shwap {
     address _fromAddress,
     address _toAddress,
     uint _tokenId
-  ) internal {
+  ) internal returns(bool){
     (
       bool success,
       bytes memory data
@@ -73,6 +98,7 @@ contract Shwap {
         _tokenId
       )
     );
+    return success;
   }
 
 }

@@ -11,4 +11,11 @@ contract TestShwap is Shwap {
   ) public {
     transfer(_tokenAddress, _fromAddress, _toAddress, _tokenId);
   }
+
+  function _isApproved(
+    address _tokenAddress,
+    uint _tokenId
+  ) public returns(bool) {
+    return isApproved(_tokenAddress, _tokenId);
+  }
 }
