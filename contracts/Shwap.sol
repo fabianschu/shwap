@@ -3,8 +3,15 @@ pragma solidity ^0.7.6;
 import "hardhat/console.sol";
 
 contract Shwap {
-
   uint public idCounter;
+
+  event ProposalEvent(
+    address indexed proposerAddress,
+    address indexed proposerTokenAddress,
+    address indexed searchedTokenAddress,
+    uint proposerTokenId,
+    uint searchedTokenId
+  );
 
   struct Proposal {
     address proposerAddress;
@@ -31,6 +38,13 @@ contract Shwap {
     );
     proposals[idCounter] = proposal;
     idCounter++;
+    emit ProposalEvent(
+      msg.sender,
+      _proposerTokenAddress,
+      _searchedTokenAddress,
+      _proposerTokenId,
+      _searchedTokenId
+    );
   }
 
   function transfer(

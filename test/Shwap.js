@@ -52,10 +52,17 @@ describe("Specs: Shwap contract", async () => {
   });
 
   describe("#addProposal", async () => {
+    let proposerAddress,
+      proposerTokenAddress,
+      searchedTokenAddress,
+      proposerTokenId,
+      searchedTokenId,
+      addProposal;
+
     beforeEach(async () => {
       niftyAInstance = await ethers.getContract("NiftyA", owner.address);
       niftyBInstance = await ethers.getContract("NiftyB", owner.address);
-      await shwapInstance.addProposal(
+      addProposal = await shwapInstance.addProposal(
         niftyAInstance.address,
         niftyBInstance.address,
         1,
@@ -68,13 +75,11 @@ describe("Specs: Shwap contract", async () => {
       expect(BigNumber.from(nextId)).to.be.equal(BigNumber.from(1));
     });
 
-    describe("data storage", async () => {
-      let proposerAddress,
-        proposerTokenAddress,
-        searchedTokenAddress,
-        proposerTokenId,
-        searchedTokenId;
+    it("emits an event", async () => {
+      expect(addProposal).to.emit(shwapInstance, "ProposalEvent");
+    });
 
+    describe("data storage", async () => {
       beforeEach(async () => {
         [
           proposerAddress,
