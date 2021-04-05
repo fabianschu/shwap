@@ -3,7 +3,17 @@ pragma solidity ^0.7.6;
 import "hardhat/console.sol";
 
 contract Shwap {
-  uint public maxIdx;
+  uint public numberProposals;
+  
+  mapping(uint => Proposal) public proposals;
+
+  struct Proposal {
+    address proposerAddress;
+    address proposerTokenAddress;
+    address counterpartTokenAddress;
+    uint proposerTokenId;
+    uint counterpartTokenId;
+  }
 
   event ProposalEvent(
     address indexed proposerAddress,
@@ -13,15 +23,10 @@ contract Shwap {
     uint counterpartTokenId
   );
 
-  struct Proposal {
-    address proposerAddress;
-    address proposerTokenAddress;
-    address counterpartTokenAddress;
-    uint proposerTokenId;
-    uint counterpartTokenId;
-  }
-  
-  mapping(uint => Proposal) public proposals;
+  event IndexChange (
+    uint indexed oldIdx,
+    uint indexed newIdx
+  );
     
   function addProposal(
     address _proposerTokenAddress,
@@ -36,8 +41,8 @@ contract Shwap {
       _proposerTokenId,
       _counterpartTokenId
     );
-    proposals[maxIdx] = proposal;
-    maxIdx++;
+    proposals[numberProposals] = proposal;
+    numberProposals++;
     emit ProposalEvent(
       msg.sender,
       _proposerTokenAddress,
@@ -48,42 +53,44 @@ contract Shwap {
   }
 
   function acceptProposal(
-    uint _id
+    uint _idx
   ) public {
+    // check if proposals available
+    require(numberProposals > 0, "No proposals available");
 
     // check if acceptor is counterpart
-    require(isOwner(proposals[_id].counterpartTokenAddress, proposals[_id].counterpartTokenId), "Not authorized");
+    require(isOwner(proposals[_idx].counterpartTokenAddress, proposals[_idx].counterpartTokenId), "Not authorized");
 
     // check if transfer is possible for both items
     bool approvalsConfirmed = isAllApproved(
-      proposals[_id].proposerTokenAddress,
-      proposals[_id].counterpartTokenAddress,
-      proposals[_id].proposerTokenId,
-      proposals[_id].counterpartTokenId
+      proposals[_idx].proposerTokenAddress,
+      proposals[_idx].counterpartTokenAddress,
+      proposals[_idx].proposerTokenId,
+      proposals[_idx].counterpartTokenId
     );
     require(approvalsConfirmed, "Insufficient approvals");
 
     // do both transfers
     bool proposerTransfer = transfer(
-      proposals[_id].proposerTokenAddress,
-      proposals[_id].proposerAddress,
+      proposals[_idx].proposerTokenAddress,
+      proposals[_idx].proposerAddress,
       msg.sender,
-      proposals[_id].proposerTokenId
+      proposals[_idx].proposerTokenId
     );
     require(proposerTransfer, "Transfer failure");
-
     bool counterpartTransfer = transfer(
-      proposals[_id].counterpartTokenAddress,
+      proposals[_idx].counterpartTokenAddress,
       msg.sender,
-      proposals[_id].proposerAddress,
-      proposals[_id].counterpartTokenId
+      proposals[_idx].proposerAddress,
+      proposals[_idx].counterpartTokenId
     );
     require(counterpartTransfer, "Transfer failure");
     
-    // remove proposal from proposals
-    
-
-    // take last proposal and put it in new gap, adapt counter, emit event
+    // clean up data structure
+    proposals[_idx] = proposals[numberProposals - 1];
+    delete proposals[numberProposals - 1];
+    emit IndexChange(numberProposals - 1, _idx);
+    numberProposals--;
   }
 
   function isOwner(

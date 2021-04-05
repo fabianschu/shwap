@@ -57,6 +57,15 @@ describe("Specs: TestShwap contract", async () => {
       niftyBInstance = await ethers.getContract("NiftyB", alice.address);
     });
 
+    describe("without proposals", async () => {
+      it("reverts transaction", async () => {
+        const acceptProposal = shwapInstance.connect(alice).acceptProposal(0);
+        await expect(acceptProposal).to.be.revertedWith(
+          "No proposals available"
+        );
+      });
+    });
+
     describe("without approvals", async () => {
       it("reverts transaction", async () => {
         addProposal = await shwapInstance.addProposal(
@@ -97,6 +106,9 @@ describe("Specs: TestShwap contract", async () => {
           1,
           2
         );
+        addSecondProposal = await shwapInstance
+          .connect(alice)
+          .addProposal(niftyBInstance.address, niftyAInstance.address, 2, 666);
         acceptProposal = await shwapInstance.connect(alice).acceptProposal(0);
       });
 
@@ -104,8 +116,36 @@ describe("Specs: TestShwap contract", async () => {
         expect(await niftyAInstance.balanceOf(alice.address)).to.equal(1);
       });
 
-      it("transfers ownership of NiftyA to Alice", async () => {
+      it("transfers ownership of NiftyB to Owner", async () => {
         expect(await niftyBInstance.balanceOf(owner.address)).to.equal(1);
+      });
+
+      it("moves last proposal to id of successful swap", async () => {
+        [
+          proposerAddress,
+          proposerTokenAddress,
+          counterpartTokenAddress,
+          proposerTokenId,
+          counterpartTokenId,
+        ] = await shwapInstance.proposals(0);
+        expect(BigNumber.from(counterpartTokenId)).to.be.equal(
+          BigNumber.from(666)
+        );
+      });
+
+      it("removes last proposal", async () => {
+        [proposerAddress] = await shwapInstance.proposals(1);
+        expect(BigNumber.from(proposerAddress)).to.be.equal(BigNumber.from(0));
+      });
+
+      it("emits an event IndexChange", async () => {
+        expect(acceptProposal)
+          .to.emit(shwapInstance, "IndexChange")
+          .withArgs(1, 0);
+      });
+
+      it("decrements the number of proposals", async () => {
+        expect(await shwapInstance.numberProposals()).to.be.equal(1);
       });
     });
   });
@@ -222,8 +262,8 @@ describe("Specs: TestShwap contract", async () => {
       );
     });
 
-    it("increments the idCounter", async () => {
-      const nextId = await shwapInstance.maxIdx();
+    it("increments the numberProposals", async () => {
+      const nextId = await shwapInstance.numberProposals();
       expect(BigNumber.from(nextId)).to.be.equal(BigNumber.from(1));
     });
 
