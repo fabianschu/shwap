@@ -8,43 +8,52 @@ contract Shwap {
   event ProposalEvent(
     address indexed proposerAddress,
     address indexed proposerTokenAddress,
-    address indexed searchedTokenAddress,
+    address indexed counterpartTokenAddress,
     uint proposerTokenId,
-    uint searchedTokenId
+    uint counterpartTokenId
   );
 
   struct Proposal {
     address proposerAddress;
     address proposerTokenAddress;
-    address searchedTokenAddress;
+    address counterpartTokenAddress;
     uint proposerTokenId;
-    uint searchedTokenId;
+    uint counterpartTokenId;
   }
   
   mapping(uint => Proposal) public proposals;
     
   function addProposal(
     address _proposerTokenAddress,
-    address _searchedTokenAddress,
+    address _counterpartTokenAddress,
     uint _proposerTokenId,
-    uint _searchedTokenId
+    uint _counterpartTokenId
   ) public {
     Proposal memory proposal = Proposal(
       msg.sender,
       _proposerTokenAddress,
-      _searchedTokenAddress,
+      _counterpartTokenAddress,
       _proposerTokenId,
-      _searchedTokenId
+      _counterpartTokenId
     );
     proposals[idCounter] = proposal;
     idCounter++;
     emit ProposalEvent(
       msg.sender,
       _proposerTokenAddress,
-      _searchedTokenAddress,
+      _counterpartTokenAddress,
       _proposerTokenId,
-      _searchedTokenId
+      _counterpartTokenId
     );
+  }
+
+  function acceptProposal(
+    uint id
+  ) public {
+    // check if transfer ispossible for both items
+    // do both transfers
+    // remove proposal from proposals
+    // take last proposal and put it in new gap, adapt counter, emit event
   }
 
   function transfer(
@@ -52,7 +61,7 @@ contract Shwap {
     address _fromAddress,
     address _toAddress,
     uint _tokenId
-  ) public {
+  ) internal {
     (
       bool success,
       bytes memory data

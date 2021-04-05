@@ -7,7 +7,7 @@ chai.use(solidity);
 
 const { expect } = chai;
 
-describe("Specs: Shwap contract", async () => {
+describe("Specs: TestShwap contract", async () => {
   let owner, alice, bob;
   let shwapInstance;
   let niftyAInstance;
@@ -16,10 +16,10 @@ describe("Specs: Shwap contract", async () => {
   beforeEach(async () => {
     await deployments.fixture();
     [owner, alice] = await ethers.getSigners();
-    shwapInstance = await ethers.getContract("Shwap", owner.address);
+    shwapInstance = await ethers.getContract("TestShwap", owner.address);
   });
 
-  describe("#transfer", async () => {
+  describe("#_transfer", async () => {
     describe("with approval", async () => {
       beforeEach(async () => {
         niftyAInstance = await ethers.getContract("NiftyA", owner.address);
@@ -27,7 +27,7 @@ describe("Specs: Shwap contract", async () => {
       });
 
       it("ownership transferred from owner to alice", async () => {
-        await shwapInstance.transfer(
+        await shwapInstance._transfer(
           niftyAInstance.address,
           owner.address,
           alice.address,
@@ -38,7 +38,7 @@ describe("Specs: Shwap contract", async () => {
 
       it("event is emitted in ERC721 contract", async () => {
         await expect(
-          shwapInstance.transfer(
+          shwapInstance._transfer(
             niftyAInstance.address,
             owner.address,
             alice.address,
@@ -54,9 +54,9 @@ describe("Specs: Shwap contract", async () => {
   describe("#addProposal", async () => {
     let proposerAddress,
       proposerTokenAddress,
-      searchedTokenAddress,
+      counterpartTokenAddress,
       proposerTokenId,
-      searchedTokenId,
+      counterpartTokenId,
       addProposal;
 
     beforeEach(async () => {
@@ -84,9 +84,9 @@ describe("Specs: Shwap contract", async () => {
         [
           proposerAddress,
           proposerTokenAddress,
-          searchedTokenAddress,
+          counterpartTokenAddress,
           proposerTokenId,
-          searchedTokenId,
+          counterpartTokenId,
         ] = await shwapInstance.proposals(0);
       });
 
@@ -98,16 +98,18 @@ describe("Specs: Shwap contract", async () => {
         expect(proposerTokenAddress).to.equal(niftyAInstance.address);
       });
 
-      it("searchedTokenAddress is address of NiftyB", async () => {
-        expect(searchedTokenAddress).to.equal(niftyBInstance.address);
+      it("counterpartTokenAddress is address of NiftyB", async () => {
+        expect(counterpartTokenAddress).to.equal(niftyBInstance.address);
       });
 
       it("proposerTokenId is 1", async () => {
         expect(BigNumber.from(proposerTokenId)).to.be.equal(BigNumber.from(1));
       });
 
-      it("searchedTokenId is 2", async () => {
-        expect(BigNumber.from(searchedTokenId)).to.be.equal(BigNumber.from(2));
+      it("counterpartTokenId is 2", async () => {
+        expect(BigNumber.from(counterpartTokenId)).to.be.equal(
+          BigNumber.from(2)
+        );
       });
     });
   });
