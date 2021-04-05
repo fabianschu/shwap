@@ -57,26 +57,56 @@ describe("Specs: TestShwap contract", async () => {
       niftyBInstance = await ethers.getContract("NiftyB", alice.address);
     });
 
-    it("without approvals reverts transaction", async () => {
-      addProposal = await shwapInstance.addProposal(
-        niftyAInstance.address,
-        niftyBInstance.address,
-        1,
-        2
-      );
-      const acceptProposal = shwapInstance.connect(alice).acceptProposal(0);
-      await expect(acceptProposal).to.be.revertedWith("Insufficient approvals");
+    describe("without approvals", async () => {
+      it("reverts transaction", async () => {
+        addProposal = await shwapInstance.addProposal(
+          niftyAInstance.address,
+          niftyBInstance.address,
+          1,
+          2
+        );
+        const acceptProposal = shwapInstance.connect(alice).acceptProposal(0);
+        await expect(acceptProposal).to.be.revertedWith(
+          "Insufficient approvals"
+        );
+      });
     });
 
-    it("with caller not being the counterpart reverts transaction", async () => {
-      addProposal = await shwapInstance.addProposal(
-        niftyAInstance.address,
-        niftyBInstance.address,
-        1,
-        2
-      );
-      const acceptProposal = shwapInstance.connect(bob).acceptProposal(0);
-      await expect(acceptProposal).to.be.revertedWith("Not authorized");
+    describe("with caller not being the counterpart", async () => {
+      it("reverts transaction", async () => {
+        addProposal = await shwapInstance.addProposal(
+          niftyAInstance.address,
+          niftyBInstance.address,
+          1,
+          2
+        );
+        const acceptProposal = shwapInstance.connect(bob).acceptProposal(0);
+        await expect(acceptProposal).to.be.revertedWith("Not authorized");
+      });
+    });
+
+    describe("with all approvals and valid ownership", async () => {
+      let acceptProposal;
+
+      beforeEach(async () => {
+        await niftyAInstance.approve(shwapInstance.address, 1);
+        await niftyBInstance.connect(alice).approve(shwapInstance.address, 2);
+        addProposal = await shwapInstance.addProposal(
+          niftyAInstance.address,
+          niftyBInstance.address,
+          1,
+          2
+        );
+        acceptProposal = await shwapInstance.connect(alice).acceptProposal(0);
+      });
+
+      it("transfers ownership of NiftyA to Alice", async () => {
+        expect(await niftyAInstance.balanceOf(alice.address)).to.equal(1);
+      });
+
+      it("transfers ownership of NiftyA to Alice", async () => {
+        expect(await niftyBInstance.balanceOf(owner.address)).to.equal(1);
+      });
     });
   });
 
@@ -193,7 +223,7 @@ describe("Specs: TestShwap contract", async () => {
     });
 
     it("increments the idCounter", async () => {
-      const nextId = await shwapInstance.idCounter();
+      const nextId = await shwapInstance.maxIdx();
       expect(BigNumber.from(nextId)).to.be.equal(BigNumber.from(1));
     });
 

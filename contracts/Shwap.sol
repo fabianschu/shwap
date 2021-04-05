@@ -3,7 +3,7 @@ pragma solidity ^0.7.6;
 import "hardhat/console.sol";
 
 contract Shwap {
-  uint public idCounter;
+  uint public maxIdx;
 
   event ProposalEvent(
     address indexed proposerAddress,
@@ -36,8 +36,8 @@ contract Shwap {
       _proposerTokenId,
       _counterpartTokenId
     );
-    proposals[idCounter] = proposal;
-    idCounter++;
+    proposals[maxIdx] = proposal;
+    maxIdx++;
     emit ProposalEvent(
       msg.sender,
       _proposerTokenAddress,
@@ -50,8 +50,10 @@ contract Shwap {
   function acceptProposal(
     uint _id
   ) public {
+
     // check if acceptor is counterpart
     require(isOwner(proposals[_id].counterpartTokenAddress, proposals[_id].counterpartTokenId), "Not authorized");
+
     // check if transfer is possible for both items
     bool approvalsConfirmed = isAllApproved(
       proposals[_id].proposerTokenAddress,
@@ -60,16 +62,27 @@ contract Shwap {
       proposals[_id].counterpartTokenId
     );
     require(approvalsConfirmed, "Insufficient approvals");
+
     // do both transfers
-    // bool proposerTransfer = transfer(
-    //   proposals[_id].proposerTokenAddress,
-    //   proposals[_id].proposerTokenAddress,
-    // )
-    //     address _tokenAddress,
-    // address _fromAddress,
-    // address _toAddress,
-    // uint _tokenId
+    bool proposerTransfer = transfer(
+      proposals[_id].proposerTokenAddress,
+      proposals[_id].proposerAddress,
+      msg.sender,
+      proposals[_id].proposerTokenId
+    );
+    require(proposerTransfer, "Transfer failure");
+
+    bool counterpartTransfer = transfer(
+      proposals[_id].counterpartTokenAddress,
+      msg.sender,
+      proposals[_id].proposerAddress,
+      proposals[_id].counterpartTokenId
+    );
+    require(counterpartTransfer, "Transfer failure");
+    
     // remove proposal from proposals
+    
+
     // take last proposal and put it in new gap, adapt counter, emit event
   }
 
