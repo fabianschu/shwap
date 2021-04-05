@@ -51,7 +51,7 @@ contract Shwap {
     uint _id
   ) public {
     // check if acceptor is counterpart
-    // require(msg.sender == )
+    require(isOwner(proposals[_id].counterpartTokenAddress, proposals[_id].counterpartTokenId), "Not authorized");
     // check if transfer is possible for both items
     bool approvalsConfirmed = isAllApproved(
       proposals[_id].proposerTokenAddress,

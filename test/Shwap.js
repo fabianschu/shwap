@@ -68,16 +68,16 @@ describe("Specs: TestShwap contract", async () => {
       await expect(acceptProposal).to.be.revertedWith("Insufficient approvals");
     });
 
-    // it("with caller not being the counterpart reverts transaction", async () => {
-    //   addProposal = await shwapInstance.addProposal(
-    //     niftyAInstance.address,
-    //     niftyBInstance.address,
-    //     1,
-    //     2
-    //   );
-    //   const acceptProposal = shwapInstance.connect(bob).acceptProposal(0);
-    //   await expect(acceptProposal).to.be.revertedWith("Not authorized");
-    // });
+    it("with caller not being the counterpart reverts transaction", async () => {
+      addProposal = await shwapInstance.addProposal(
+        niftyAInstance.address,
+        niftyBInstance.address,
+        1,
+        2
+      );
+      const acceptProposal = shwapInstance.connect(bob).acceptProposal(0);
+      await expect(acceptProposal).to.be.revertedWith("Not authorized");
+    });
   });
 
   describe("#_isOwner", async () => {
@@ -93,7 +93,9 @@ describe("Specs: TestShwap contract", async () => {
     });
 
     it("when caller is owner of counterpart token, emits OwnershipConfirmation event", async () => {
-      const isOwner = await shwapInstance._isOwner(niftyBInstance.address, 2);
+      const isOwner = await shwapInstance
+        .connect(alice)
+        ._isOwner(niftyBInstance.address, 2);
       expect(isOwner).to.emit(shwapInstance, "OwnershipConfirmation");
     });
 
