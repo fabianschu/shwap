@@ -162,10 +162,11 @@ describe("Specs: TestShwap contract", async () => {
       );
     });
 
-    it("when caller is owner of counterpart token, emits OwnershipConfirmation event", async () => {
+    it.only("when caller is owner of counterpart token, emits OwnershipConfirmation event", async () => {
       const isOwner = await shwapInstance
         .connect(alice)
         ._isOwner(niftyBInstance.address, 2);
+      console.log(isOwner);
       expect(isOwner).to.emit(shwapInstance, "OwnershipConfirmation");
     });
 
