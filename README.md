@@ -1,5 +1,21 @@
-# Start local hardhat node
+# Hardhat
+## Start local hardhat node
 `npx hardhat node`
+Runs in the background.
+
+## Hardhat console
+`npx hardhat console --network localhost`
+New terminal: connect to network via console
+
+### Accounts
+```js
+await hre.getNamedAccounts();
+```
+
+### Contract Interaction
+```js
+const contractInstance = await ethers.getContract('contractName')
+```
 
 # Setup local geth client
 

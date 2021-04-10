@@ -66,6 +66,19 @@ describe("Specs: TestShwap contract", async () => {
       });
     });
 
+    describe("with nonexistent index", async () => {
+      it.only("reverts transaction", async () => {
+        addProposal = await shwapInstance.addProposal(
+          niftyAInstance.address,
+          niftyBInstance.address,
+          1,
+          2
+        );
+        const acceptProposal = shwapInstance.connect(alice).acceptProposal(4);
+        await expect(acceptProposal).to.be.revertedWith("Index does not exist");
+      });
+    });
+
     describe("without approvals", async () => {
       it("reverts transaction", async () => {
         addProposal = await shwapInstance.addProposal(
@@ -162,11 +175,10 @@ describe("Specs: TestShwap contract", async () => {
       );
     });
 
-    it.only("when caller is owner of counterpart token, emits OwnershipConfirmation event", async () => {
+    it("when caller is owner of counterpart token, emits OwnershipConfirmation event", async () => {
       const isOwner = await shwapInstance
         .connect(alice)
         ._isOwner(niftyBInstance.address, 2);
-      console.log(isOwner);
       expect(isOwner).to.emit(shwapInstance, "OwnershipConfirmation");
     });
 

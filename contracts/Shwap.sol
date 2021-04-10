@@ -13,6 +13,7 @@ contract Shwap {
     address counterpartTokenAddress;
     uint proposerTokenId;
     uint counterpartTokenId;
+    bool exists;
   }
 
   event ProposalEvent(
@@ -39,7 +40,8 @@ contract Shwap {
       _proposerTokenAddress,
       _counterpartTokenAddress,
       _proposerTokenId,
-      _counterpartTokenId
+      _counterpartTokenId,
+      true
     );
     proposals[numberProposals] = proposal;
     numberProposals++;
@@ -57,6 +59,10 @@ contract Shwap {
   ) public {
     // check if proposals available
     require(numberProposals > 0, "No proposals available");
+    
+    // check if proposal wiht index exists
+    require(proposals[_idx].proposerAddress != address(0), "Index does not exist");
+
 
     // check if acceptor is counterpart
     require(isOwner(proposals[_idx].counterpartTokenAddress, proposals[_idx].counterpartTokenId), "Not authorized");
