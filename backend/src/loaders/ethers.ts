@@ -1,7 +1,12 @@
-import ethers from "ethers";
+import { ethers } from "ethers";
+import { addEventlisteners } from "../subscribers/ethereumEvents";
 
-const EthersInstance = new ethers.providers.WebSocketProvider(
-  "ws://localhost:1234"
-);
+export const setupInterface = async () => {
+  const provider = new ethers.providers.JsonRpcProvider(
+    "http://127.0.0.1:8545/"
+  );
 
-export default EthersInstance;
+  addEventlisteners(provider);
+
+  return provider;
+};

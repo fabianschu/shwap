@@ -1,30 +1,33 @@
+import express from "express";
+import { getConnection, getRepository, Repository } from "typeorm";
+import { privateToAddress } from "ethereumjs-util";
+import loader from "../../src/loaders";
+import { User } from "../../src/entity/User";
 import WS from "jest-websocket-mock";
 
-const lol = async () => {
-  // create a WS instance, listening on port 1234 on localhost
-  const server = new WS("ws://localhost:1234");
+const app = express();
 
-  // real clients can connect
-  const client = new WebSocket("ws://localhost:1234");
-  await server.connected; // wait for the server to have established the connection
-  console.log("nigga what?");
-  // the mock websocket server will record all the messages it receives
-  client.send("hello");
+describe("subscriber", () => {
+  let server: WS;
 
-  // the mock websocket server can also send messages to all connected clients
-  server.send("hello everyone");
+  beforeAll(async () => {
+    server = new WS("ws://localhost:1234");
+    console.log("server created");
+    console.log("import client");
+    let client: any = await import("../../src/loaders/ethers");
+    console.log("client imported");
 
-  // ...simulate an error and close the connection
-  server.error();
+    console.log("connect server");
+    await server.connected;
+    client.send("hello");
+  });
 
-  // ...or gracefully close the connection
-  server.close();
+  afterAll(() => {
+    server.close();
+    WS.clean();
+  });
 
-  // The WS class also has a static "clean" method to gracefully close all open connections,
-  // particularly useful to reset the environment between test runs.
-  WS.clean();
-};
-
-it("creates a new user", async () => {
-  await lol();
+  it("receives a message", async () => {
+    server.send("hello everyone");
+  });
 });

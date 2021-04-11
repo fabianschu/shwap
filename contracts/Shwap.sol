@@ -6,8 +6,18 @@ contract Shwap {
   uint public numberProposals;
   
   mapping(uint => Proposal) public proposals;
+  // mapping(address => ) private proposers;
 
   struct Proposal {
+    address proposerAddress;
+    address proposerTokenAddress;
+    address counterpartTokenAddress;
+    uint proposerTokenId;
+    uint counterpartTokenId;
+    bool exists;
+  }
+
+  struct ownerProposals {
     address proposerAddress;
     address proposerTokenAddress;
     address counterpartTokenAddress;

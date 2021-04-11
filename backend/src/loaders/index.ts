@@ -4,6 +4,7 @@ import Logger from "./logger";
 import typeormLoader from "./typeorm";
 import { User } from "../entity/User";
 import { Proposal } from "../entity/Proposal";
+import { setupInterface } from "./ethers";
 
 const models = [
   {
@@ -19,6 +20,7 @@ const models = [
 export default async ({ expressApp }) => {
   await typeormLoader();
   Logger.info("✌️ DB loaded and connected!");
+  const ethereumInterface = setupInterface();
 
   dependencyInjectorLoader({ models });
 
