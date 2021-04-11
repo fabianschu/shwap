@@ -14,7 +14,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     log: true,
   });
 
-  await deploy("TestShwap", {
+  await deploy("Shwap", {
     from: owner,
     args: [],
     log: true,

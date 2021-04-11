@@ -281,7 +281,7 @@ describe("Specs: TestShwap contract", async () => {
     });
 
     it("emits an event", async () => {
-      expect(addProposal).to.emit(shwapInstance, "ProposalEvent");
+      expect(addProposal).to.emit(shwapInstance, "ProposalAdded");
     });
 
     describe("data storage", async () => {

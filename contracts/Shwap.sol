@@ -26,7 +26,7 @@ contract Shwap {
     bool exists;
   }
 
-  event ProposalEvent(
+  event ProposalAdded(
     address indexed proposerAddress,
     address indexed proposerTokenAddress,
     address indexed counterpartTokenAddress,
@@ -55,7 +55,7 @@ contract Shwap {
     );
     proposals[numberProposals] = proposal;
     numberProposals++;
-    emit ProposalEvent(
+    emit ProposalAdded(
       msg.sender,
       _proposerTokenAddress,
       _counterpartTokenAddress,
