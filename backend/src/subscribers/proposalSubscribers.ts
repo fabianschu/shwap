@@ -9,21 +9,22 @@ import { IProposal } from "../interfaces/IProposal";
 @EventSubscriber()
 export default class ProposalSubscriber {
   @On(events.proposal.onProposalAdded)
-  public async onProposalAdded(newProposal: IProposal) {
-    const Logger: Logger = Container.get("logger");
-    const proposalRepository: Repository<Proposal> = Container.get(
-      "proposalRepository"
-    );
+  public async onProposalAdded(newProposal: any) {
+    console.log(newProposal);
+    // const Logger: Logger = Container.get("logger");
+    // const proposalRepository: Repository<Proposal> = Container.get(
+    //   "proposalRepository"
+    // );
 
-    try {
-      const proposal = await proposalRepository.save(newProposal);
-    } catch (e) {
-      Logger.error(
-        `🔥 Error on event ${events.proposal.onProposalAdded}: %o`,
-        e
-      );
-      // Throw the error so the process die (check src/app.ts)
-      throw e;
-    }
+    // try {
+    //   const proposal = await proposalRepository.save(newProposal);
+    // } catch (e) {
+    //   Logger.error(
+    //     `🔥 Error on event ${events.proposal.onProposalAdded}: %o`,
+    //     e
+    //   );
+    //   // Throw the error so the process die (check src/app.ts)
+    //   throw e;
+    // }
   }
 }

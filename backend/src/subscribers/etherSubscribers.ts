@@ -1,17 +1,20 @@
 import { ethers } from "ethers";
+import { EventDispatcher } from "event-dispatch";
 import * as shwapInterface from "../../../artifacts/contracts/Shwap.sol/Shwap.json";
 
-export const addEventlisteners = (
-  provider: ethers.providers.JsonRpcProvider
-) => {
+const provider = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545/");
+const eventDispatcher = new EventDispatcher();
+
+export const subscribeToEthereum = () => {
   provider.on("block", (blocknumber) => {
-    console.log(blocknumber);
+    console.log("new block");
+    eventDispatcher.dispatch("onProposalAdded", "schubidubi");
   });
 
-  proposalEvents(provider);
+  proposalEvents();
 };
 
-const proposalEvents = (provider) => {
+const proposalEvents = () => {
   const shwapContract = new ethers.Contract(
     "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
     shwapInterface.abi,

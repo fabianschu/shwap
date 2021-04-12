@@ -4,7 +4,8 @@ import Logger from "./logger";
 import typeormLoader from "./typeorm";
 import { User } from "../entity/User";
 import { Proposal } from "../entity/Proposal";
-import { setupInterface } from "./ethers";
+import { subscribeToEthereum } from "../subscribers/etherSubscribers";
+import "../subscribers/proposalSubscribers";
 
 const models = [
   {
@@ -20,9 +21,11 @@ const models = [
 export default async ({ expressApp }) => {
   await typeormLoader();
   Logger.info("✌️ DB loaded and connected!");
-  const ethereumInterface = setupInterface();
 
   dependencyInjectorLoader({ models });
+
+  subscribeToEthereum();
+  Logger.info("✌️ Susbcribed to Ethereum");
 
   expressLoader({ app: expressApp });
   Logger.info("✌️ Express loaded");
