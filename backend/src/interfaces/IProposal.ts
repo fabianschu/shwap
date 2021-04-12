@@ -1,7 +1,10 @@
 export interface IProposal {
   id: number;
-  offerAddress: string;
-  wantedAddress: string;
+  proposerAddress: string;
+  proposerTokenAddress: string;
+  counterpartTokenAddress: string;
+  proposerTokenId: string;
+  counterpartTokenId: string;
 }
 
 export interface IProposalDTO {

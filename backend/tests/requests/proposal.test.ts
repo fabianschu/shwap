@@ -73,16 +73,18 @@ describe("/proposals route", () => {
         });
 
         describe("with valid parameters", () => {
-          it("creates a proposal", async (done) => {
+          it.only("creates a proposal", async (done) => {
             const proposal = {
-              offerAddress: "abc123",
+              proposerAddress: "abc123",
             };
             await request(app)
               .post(`/api/proposals`)
               .set(authHeader)
               .send(proposal);
             const savedProposal = await proposalRepository.findOne(proposal);
-            expect(savedProposal.offerAddress).toBe(proposal.offerAddress);
+            expect(savedProposal.proposerAddress).toBe(
+              proposal.proposerAddress
+            );
             done();
           });
         });

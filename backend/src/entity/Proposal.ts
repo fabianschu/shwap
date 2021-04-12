@@ -7,10 +7,19 @@ export class Proposal {
   id: number;
 
   @Column({ default: null, nullable: true })
-  offerAddress: string;
+  proposerAddress: string;
 
   @Column({ default: null, nullable: true })
-  wantedAddress: string;
+  proposerTokenAddress: string;
+
+  @Column({ default: null, nullable: true })
+  counterpartTokenAddress: string;
+
+  @Column({ default: null, nullable: true })
+  proposerTokenId: string;
+
+  @Column({ default: null, nullable: true })
+  counterpartTokenId: string;
 
   @ManyToOne(() => User, (user) => user.proposals)
   user: User;

@@ -1,5 +1,5 @@
 export default {
   proposal: {
-    someMethod: "onUserSignUp",
+    onProposalAdded: "onProposalAdded",
   },
 };
