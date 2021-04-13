@@ -73,7 +73,7 @@ describe("/proposals route", () => {
         });
 
         describe("with valid parameters", () => {
-          it.only("creates a proposal", async (done) => {
+          it("creates a proposal", async (done) => {
             const proposal = {
               proposerAddress: "abc123",
             };

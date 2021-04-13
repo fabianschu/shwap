@@ -27,6 +27,7 @@ contract Shwap {
   }
 
   event ProposalAdded(
+    uint numberProposals,
     address indexed proposerAddress,
     address indexed proposerTokenAddress,
     address indexed counterpartTokenAddress,
@@ -56,6 +57,7 @@ contract Shwap {
     proposals[numberProposals] = proposal;
     numberProposals++;
     emit ProposalAdded(
+      numberProposals,
       msg.sender,
       _proposerTokenAddress,
       _counterpartTokenAddress,
