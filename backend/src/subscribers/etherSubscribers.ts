@@ -7,8 +7,8 @@ const eventDispatcher = new EventDispatcher();
 
 export const subscribeToEthereum = () => {
   provider.on("block", (blocknumber) => {
-    console.log("new block");
-    eventDispatcher.dispatch("onProposalAdded", "schubidubi");
+    console.log("new block: ", blocknumber);
+    // eventDispatcher.dispatch("onProposalAdded", "schubidubi");
   });
 
   proposalEvents();
@@ -21,8 +21,33 @@ const proposalEvents = () => {
     provider
   );
 
-  shwapContract.on("ProposalAdded", (val) => {
-    console.log("New EVENT!!");
-    console.log(val);
-  });
+  shwapContract.on(
+    "ProposalAdded",
+    (
+      index,
+      proposerAddress,
+      proposerTokenAddress,
+      counterpartTokenAddress,
+      proposerTokenId,
+      counterpartTokenId
+    ) => {
+      console.log("New EVENT!!");
+      console.log({
+        index,
+        proposerAddress,
+        proposerTokenAddress,
+        counterpartTokenAddress,
+        proposerTokenId,
+        counterpartTokenId,
+      });
+      eventDispatcher.dispatch("onProposalAdded", {
+        index,
+        proposerAddress,
+        proposerTokenAddress,
+        counterpartTokenAddress,
+        proposerTokenId,
+        counterpartTokenId,
+      });
+    }
+  );
 };

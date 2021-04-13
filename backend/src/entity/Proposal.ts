@@ -7,6 +7,9 @@ export class Proposal {
   id: number;
 
   @Column({ default: null, nullable: true })
+  index: number;
+
+  @Column({ default: null, nullable: true })
   proposerAddress: string;
 
   @Column({ default: null, nullable: true })
@@ -16,10 +19,10 @@ export class Proposal {
   counterpartTokenAddress: string;
 
   @Column({ default: null, nullable: true })
-  proposerTokenId: string;
+  proposerTokenId: number;
 
   @Column({ default: null, nullable: true })
-  counterpartTokenId: string;
+  counterpartTokenId: number;
 
   @ManyToOne(() => User, (user) => user.proposals)
   user: User;

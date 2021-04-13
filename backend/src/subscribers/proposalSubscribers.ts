@@ -4,27 +4,35 @@ import { Repository } from "typeorm";
 import events from "./events";
 import { Logger } from "winston";
 import { Proposal } from "../entity/Proposal";
-import { IProposal } from "../interfaces/IProposal";
+import { IProposalDTO } from "../interfaces/IProposal";
 
 @EventSubscriber()
 export default class ProposalSubscriber {
   @On(events.proposal.onProposalAdded)
-  public async onProposalAdded(newProposal: any) {
-    console.log(newProposal);
-    // const Logger: Logger = Container.get("logger");
-    // const proposalRepository: Repository<Proposal> = Container.get(
-    //   "proposalRepository"
-    // );
-
-    // try {
-    //   const proposal = await proposalRepository.save(newProposal);
-    // } catch (e) {
-    //   Logger.error(
-    //     `🔥 Error on event ${events.proposal.onProposalAdded}: %o`,
-    //     e
-    //   );
-    //   // Throw the error so the process die (check src/app.ts)
-    //   throw e;
-    // }
+  public async onProposalAdded(newProposal: IProposalDTO) {
+    console.log("newProposal");
+    console.log(newProposal.proposerTokenId.toNumber());
+    const Logger: Logger = Container.get("logger");
+    const proposalRepository: Repository<Proposal> = Container.get(
+      "proposalRepository"
+    );
+    const parsedProposal = this.parseFromBigNumbers(newProposal);
+    try {
+      const proposal = await proposalRepository.save(parsedProposal);
+    } catch (e) {
+      Logger.error(
+        `🔥 Error on event ${events.proposal.onProposalAdded}: %o`,
+        e
+      );
+      // Throw the error so the process die (check src/app.ts)
+      throw e;
+    }
   }
+
+  private parseFromBigNumbers = (newProposal: IProposalDTO) => ({
+    ...newProposal,
+    index: newProposal.index.toNumber(),
+    proposerTokenId: newProposal.proposerTokenId.toNumber(),
+    counterpartTokenId: newProposal.counterpartTokenId.toNumber(),
+  });
 }

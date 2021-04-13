@@ -19,5 +19,11 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     args: [],
     log: true,
   });
+
+  await deploy("TestShwap", {
+    from: owner,
+    args: [],
+    log: true,
+  });
 };
-module.exports.tags = ["NiftyA", "NiftyB", "Shwap"];
+module.exports.tags = ["NiftyA", "NiftyB", "Shwap", "TestShwap"];

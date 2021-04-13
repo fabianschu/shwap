@@ -1,5 +1,7 @@
+import { BigNumber } from "@ethersproject/bignumber";
+
 export interface IProposal {
-  id: number;
+  contractIndex: number;
   proposerAddress: string;
   proposerTokenAddress: string;
   counterpartTokenAddress: string;
@@ -8,7 +10,10 @@ export interface IProposal {
 }
 
 export interface IProposalDTO {
-  offerAddress?: string;
-  wantedAddress?: string;
-  user: number;
+  index: BigNumber;
+  proposerAddress: string;
+  proposerTokenAddress: string;
+  counterpartTokenAddress: string;
+  proposerTokenId: BigNumber;
+  counterpartTokenId: BigNumber;
 }
