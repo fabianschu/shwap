@@ -5,7 +5,6 @@ import typeormLoader from "./typeorm";
 import { User } from "../entity/User";
 import { Proposal } from "../entity/Proposal";
 import { subscribeToEthereum } from "../subscribers/etherSubscribers";
-import "../subscribers/proposalSubscribers";
 
 const models = [
   {

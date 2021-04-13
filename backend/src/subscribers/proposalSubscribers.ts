@@ -10,13 +10,13 @@ import { IProposalDTO } from "../interfaces/IProposal";
 export default class ProposalSubscriber {
   @On(events.proposal.onProposalAdded)
   public async onProposalAdded(newProposal: IProposalDTO) {
-    console.log("newProposal");
-    console.log(newProposal.proposerTokenId.toNumber());
     const Logger: Logger = Container.get("logger");
     const proposalRepository: Repository<Proposal> = Container.get(
       "proposalRepository"
     );
+    console.log(newProposal);
     const parsedProposal = this.parseFromBigNumbers(newProposal);
+    console.log(parsedProposal);
     try {
       const proposal = await proposalRepository.save(parsedProposal);
     } catch (e) {
