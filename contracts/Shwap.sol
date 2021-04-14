@@ -36,8 +36,8 @@ contract Shwap {
   );
 
   event IndexChange (
-    uint indexed oldIdx,
-    uint indexed newIdx
+    uint indexed filledIdx,
+    uint indexed newLastIdx
   );
     
   function addProposal(
@@ -107,8 +107,8 @@ contract Shwap {
     // clean up data structure
     proposals[_idx] = proposals[numberProposals - 1];
     delete proposals[numberProposals - 1];
-    emit IndexChange(numberProposals - 1, _idx);
     numberProposals--;
+    emit IndexChange(numberProposals - 1, _idx);
   }
 
   function isOwner(
