@@ -1,6 +1,6 @@
 import { BigNumber } from "@ethersproject/bignumber";
 
-const index = BigNumber.from(1);
+const index = BigNumber.from(0);
 const proposerTokenId = BigNumber.from(1);
 const counterpartTokenId = BigNumber.from(2);
 

@@ -3,7 +3,7 @@ import express from "express";
 import { getConnection, getRepository, Repository } from "typeorm";
 import loader from "../../src/loaders";
 import { Proposal } from "../../src/entity/Proposal";
-import { createUser, deleteUser } from "../fixtures/user";
+import { createUser, deleteUser } from "../_fixtures/user";
 
 const app = express();
 

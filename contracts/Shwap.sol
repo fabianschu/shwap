@@ -36,8 +36,8 @@ contract Shwap {
   );
 
   event IndexChange (
-    uint indexed filledIdx,
-    uint indexed newLastIdx
+    uint indexed oldLastIdx,
+    uint indexed newIdx
   );
     
   function addProposal(
@@ -69,14 +69,13 @@ contract Shwap {
   function acceptProposal(
     uint _idx
   ) public {
-    // check if proposals available
+    // return if there are no proposals
     require(numberProposals > 0, "No proposals available");
     
-    // check if proposal wiht index exists
+    // check if proposal with index exists
     require(proposals[_idx].proposerAddress != address(0), "Index does not exist");
 
-
-    // check if acceptor is counterpart
+    // check if acceptor owns the requested nft
     require(isOwner(proposals[_idx].counterpartTokenAddress, proposals[_idx].counterpartTokenId), "Not authorized");
 
     // check if transfer is possible for both items
@@ -107,8 +106,8 @@ contract Shwap {
     // clean up data structure
     proposals[_idx] = proposals[numberProposals - 1];
     delete proposals[numberProposals - 1];
-    numberProposals--;
     emit IndexChange(numberProposals - 1, _idx);
+    numberProposals--;
   }
 
   function isOwner(

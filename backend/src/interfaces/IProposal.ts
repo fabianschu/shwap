@@ -17,3 +17,8 @@ export interface IProposalDTO {
   proposerTokenId: BigNumber;
   counterpartTokenId: BigNumber;
 }
+
+export interface IIndexChangeDTO {
+  filledIndex: BigNumber;
+  newLastIndex: BigNumber;
+}
