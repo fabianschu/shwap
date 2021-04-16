@@ -16,6 +16,8 @@ const contracts = () => ({
 const { shwapContract } = contracts();
 
 export const subscribeToEthereum = () => {
+  if (process.env.NODE_ENV == "test") return;
+
   provider.on("block", (blocknumber) => {
     console.log("new block: ", blocknumber);
     // eventDispatcher.dispatch("onProposalAdded", "schubidubi");
@@ -47,4 +49,12 @@ const proposalEvents = () => {
       });
     }
   );
+
+  shwapContract.on("IndexChange", (oldLastIdx, filledIndex) => {
+    console.log({ oldLastIdx, filledIndex });
+    // proposalServiceInstance.maintainOrder({
+    //   filledIndex,
+    //   newLastIndex,
+    // });
+  });
 };
