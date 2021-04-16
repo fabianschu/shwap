@@ -24,6 +24,9 @@ export class Proposal {
   @Column({ default: null, nullable: true })
   counterpartTokenId: number;
 
+  @Column({ default: null, nullable: true })
+  status: string;
+
   @ManyToOne(() => User, (user) => user.proposals)
   user: User;
 }

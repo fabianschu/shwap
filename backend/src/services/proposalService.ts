@@ -20,7 +20,10 @@ export default class ProposalService {
   ): Promise<IProposal | any> {
     const parsedProposal = this.parseFromBigNumbers(proposalDTO);
     try {
-      return await this.proposalRepository.save(parsedProposal);
+      return await this.proposalRepository.save({
+        ...parsedProposal,
+        status: "open",
+      });
     } catch (e) {
       this.logger.error(`🔥 Error saving proposal`, e);
       throw e;

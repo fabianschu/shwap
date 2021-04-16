@@ -38,12 +38,20 @@ describe("AuthService", () => {
   });
 
   describe("#SaveProposal", () => {
+    let id;
+
+    beforeEach(async () => {
+      id = await proposalServiceInstance.SaveProposal(ProposalServiceDTO);
+    });
+
     it("creates a new proposal in the database", async () => {
-      const { id } = await proposalServiceInstance.SaveProposal(
-        ProposalServiceDTO
-      );
       const newProposal = await proposalRepository.findOne(id);
       expect(newProposal.index).toBe(ProposalServiceDTO.index.toNumber());
+    });
+
+    it("sets the proposal status to 'open' ", async () => {
+      const newProposal = await proposalRepository.findOne(id);
+      expect(newProposal.status).toEqual("open");
     });
   });
 
