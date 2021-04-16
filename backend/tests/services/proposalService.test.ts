@@ -33,11 +33,11 @@ describe("AuthService", () => {
     await connection.close();
   });
 
-  describe("#SaveProposal", () => {
-    afterEach(async () => {
-      await proposalRepository.query("DELETE FROM proposals;");
-    });
+  afterEach(async () => {
+    await proposalRepository.query("DELETE FROM proposals;");
+  });
 
+  describe("#SaveProposal", () => {
     it("creates a new proposal in the database", async () => {
       const { id } = await proposalServiceInstance.SaveProposal(
         ProposalServiceDTO
@@ -45,6 +45,9 @@ describe("AuthService", () => {
       const newProposal = await proposalRepository.findOne(id);
       expect(newProposal.index).toBe(ProposalServiceDTO.index.toNumber());
     });
+  });
+
+  describe("#MaintainOrder", () => {
     describe("with only one proposal", () => {
       it("removes accepted proposal from db", async () => {
         await proposalServiceInstance.SaveProposal(ProposalServiceDTO);
