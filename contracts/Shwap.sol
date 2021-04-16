@@ -6,6 +6,7 @@ contract Shwap {
   uint public numberProposals;
   
   mapping(uint => Proposal) public proposals;
+  // mapping(address => ) private proposers;
 
   struct Proposal {
     address proposerAddress;
@@ -13,9 +14,20 @@ contract Shwap {
     address counterpartTokenAddress;
     uint proposerTokenId;
     uint counterpartTokenId;
+    bool exists;
   }
 
-  event ProposalEvent(
+  struct ownerProposals {
+    address proposerAddress;
+    address proposerTokenAddress;
+    address counterpartTokenAddress;
+    uint proposerTokenId;
+    uint counterpartTokenId;
+    bool exists;
+  }
+
+  event ProposalAdded(
+    uint numberProposals,
     address indexed proposerAddress,
     address indexed proposerTokenAddress,
     address indexed counterpartTokenAddress,
@@ -24,7 +36,7 @@ contract Shwap {
   );
 
   event IndexChange (
-    uint indexed oldIdx,
+    uint indexed oldLastIdx,
     uint indexed newIdx
   );
     
@@ -39,11 +51,13 @@ contract Shwap {
       _proposerTokenAddress,
       _counterpartTokenAddress,
       _proposerTokenId,
-      _counterpartTokenId
+      _counterpartTokenId,
+      true
     );
     proposals[numberProposals] = proposal;
     numberProposals++;
-    emit ProposalEvent(
+    emit ProposalAdded(
+      numberProposals,
       msg.sender,
       _proposerTokenAddress,
       _counterpartTokenAddress,
@@ -55,10 +69,13 @@ contract Shwap {
   function acceptProposal(
     uint _idx
   ) public {
-    // check if proposals available
+    // return if there are no proposals
     require(numberProposals > 0, "No proposals available");
+    
+    // check if proposal with index exists
+    require(proposals[_idx].proposerAddress != address(0), "Index does not exist");
 
-    // check if acceptor is counterpart
+    // check if acceptor owns the requested nft
     require(isOwner(proposals[_idx].counterpartTokenAddress, proposals[_idx].counterpartTokenId), "Not authorized");
 
     // check if transfer is possible for both items

@@ -66,6 +66,19 @@ describe("Specs: TestShwap contract", async () => {
       });
     });
 
+    describe("with nonexistent index", async () => {
+      it("reverts transaction", async () => {
+        addProposal = await shwapInstance.addProposal(
+          niftyAInstance.address,
+          niftyBInstance.address,
+          1,
+          2
+        );
+        const acceptProposal = shwapInstance.connect(alice).acceptProposal(4);
+        await expect(acceptProposal).to.be.revertedWith("Index does not exist");
+      });
+    });
+
     describe("without approvals", async () => {
       it("reverts transaction", async () => {
         addProposal = await shwapInstance.addProposal(
@@ -268,7 +281,16 @@ describe("Specs: TestShwap contract", async () => {
     });
 
     it("emits an event", async () => {
-      expect(addProposal).to.emit(shwapInstance, "ProposalEvent");
+      expect(addProposal)
+        .to.emit(shwapInstance, "ProposalAdded")
+        .withArgs(
+          1,
+          owner.address,
+          niftyAInstance.address,
+          niftyBInstance.address,
+          1,
+          2
+        );
     });
 
     describe("data storage", async () => {

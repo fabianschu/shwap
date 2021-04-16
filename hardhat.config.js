@@ -6,8 +6,17 @@ require("hardhat-deploy-ethers");
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
+
 module.exports = {
   solidity: "0.7.6",
+  // networks: {
+  //   hardhat: {
+  //     mining: {
+  //       auto: false,
+  //       interval: 5000,
+  //     },
+  //   },
+  // },
   namedAccounts: {
     owner: {
       default: 0, // here this will by default take the first account as deployer
