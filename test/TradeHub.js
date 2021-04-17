@@ -267,8 +267,8 @@ describe("Specs: TestTradeHub contract", async () => {
     });
   });
 
-  describe("#removeProposal", async () => {
-    let removeProposal;
+  describe("#delistProposal", async () => {
+    let delistProposal;
 
     beforeEach(async () => {
       niftyAInstance = await ethers.getContract("NiftyA", owner.address);
@@ -283,11 +283,11 @@ describe("Specs: TestTradeHub contract", async () => {
 
     describe("caller is NOT owner of proposed token", async () => {
       beforeEach(async () => {
-        removeProposal = tradeHubInstance.connect(alice).removeProposal(0);
+        delistProposal = tradeHubInstance.connect(alice).delistProposal(0);
       });
 
       it("reverts the transaction", async () => {
-        await expect(removeProposal).to.be.revertedWith(
+        await expect(delistProposal).to.be.revertedWith(
           "You are not the owner of the proposed token"
         );
       });
@@ -295,7 +295,7 @@ describe("Specs: TestTradeHub contract", async () => {
 
     describe("caller is owner of proposed token", async () => {
       beforeEach(async () => {
-        await tradeHubInstance.removeProposal(0);
+        await tradeHubInstance.delistProposal(0);
       });
 
       it("removes the proposal", async () => {});

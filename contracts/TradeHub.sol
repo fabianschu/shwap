@@ -118,7 +118,7 @@ contract TradeHub {
     numberProposals--;
   }
 
-  function removeProposal(
+  function delistProposal(
     uint _idx
   ) public {
     require(proposals[_idx].proposerAddress == msg.sender,
