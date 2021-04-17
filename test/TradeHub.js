@@ -173,6 +173,114 @@ describe("Specs: TestTradeHub contract", async () => {
     });
   });
 
+  describe("#addProposal", async () => {
+    describe("caller is NOT owner of proposed token", async () => {
+      let addProposal;
+
+      beforeEach(async () => {
+        niftyAInstance = await ethers.getContract("NiftyA", owner.address);
+        niftyBInstance = await ethers.getContract("NiftyB", owner.address);
+        addProposal = tradeHubInstance
+          .connect(alice)
+          .addProposal(niftyAInstance.address, niftyBInstance.address, 1, 2);
+      });
+
+      it("reverts the transaction", async () => {
+        await expect(addProposal).to.be.revertedWith(
+          "Proposer must be owner of proposed token"
+        );
+      });
+    });
+
+    describe("caller is owner of proposed token", async () => {
+      let proposerAddress,
+        proposerTokenAddress,
+        counterpartTokenAddress,
+        proposerTokenId,
+        counterpartTokenId,
+        addProposal;
+
+      beforeEach(async () => {
+        niftyAInstance = await ethers.getContract("NiftyA", owner.address);
+        niftyBInstance = await ethers.getContract("NiftyB", owner.address);
+        addProposal = await tradeHubInstance.addProposal(
+          niftyAInstance.address,
+          niftyBInstance.address,
+          1,
+          2
+        );
+      });
+
+      it("increments the numberProposals", async () => {
+        const nextId = await tradeHubInstance.numberProposals();
+        expect(BigNumber.from(nextId)).to.be.equal(BigNumber.from(1));
+      });
+
+      it("emits an event", async () => {
+        expect(addProposal)
+          .to.emit(tradeHubInstance, "ProposalAdded")
+          .withArgs(
+            1,
+            owner.address,
+            niftyAInstance.address,
+            niftyBInstance.address,
+            1,
+            2
+          );
+      });
+
+      describe("data storage", async () => {
+        beforeEach(async () => {
+          [
+            proposerAddress,
+            proposerTokenAddress,
+            counterpartTokenAddress,
+            proposerTokenId,
+            counterpartTokenId,
+          ] = await tradeHubInstance.proposals(0);
+        });
+
+        it("proposerAddress is address of owner", async () => {
+          expect(proposerAddress).to.equal(owner.address);
+        });
+
+        it("proposerTokenAddress is address of NiftyA", async () => {
+          expect(proposerTokenAddress).to.equal(niftyAInstance.address);
+        });
+
+        it("counterpartTokenAddress is address of NiftyB", async () => {
+          expect(counterpartTokenAddress).to.equal(niftyBInstance.address);
+        });
+
+        it("proposerTokenId is 1", async () => {
+          expect(BigNumber.from(proposerTokenId)).to.be.equal(
+            BigNumber.from(1)
+          );
+        });
+
+        it("counterpartTokenId is 2", async () => {
+          expect(BigNumber.from(counterpartTokenId)).to.be.equal(
+            BigNumber.from(2)
+          );
+        });
+      });
+    });
+  });
+
+  // desctibe("#removeProposal", async () => {
+  //   beforeEach(async () => {
+  //     niftyAInstance = await ethers.getContract("NiftyA", owner.address);
+  //     niftyBInstance = await ethers.getContract("NiftyB", alice.address);
+  //     await tradeHubInstance.addProposal(
+  //       niftyAInstance.address,
+  //       niftyBInstance.address,
+  //       1,
+  //       2
+  //     );
+  //   });
+
+  // })
+
   describe("#_isOwner", async () => {
     beforeEach(async () => {
       niftyAInstance = await ethers.getContract("NiftyA", owner.address);
@@ -266,78 +374,6 @@ describe("Specs: TestTradeHub contract", async () => {
         tradeHubInstance,
         "AllApprovalConfirmation"
       );
-    });
-  });
-
-  describe("#addProposal", async () => {
-    let proposerAddress,
-      proposerTokenAddress,
-      counterpartTokenAddress,
-      proposerTokenId,
-      counterpartTokenId,
-      addProposal;
-
-    beforeEach(async () => {
-      niftyAInstance = await ethers.getContract("NiftyA", owner.address);
-      niftyBInstance = await ethers.getContract("NiftyB", owner.address);
-      addProposal = await tradeHubInstance.addProposal(
-        niftyAInstance.address,
-        niftyBInstance.address,
-        1,
-        2
-      );
-    });
-
-    it("increments the numberProposals", async () => {
-      const nextId = await tradeHubInstance.numberProposals();
-      expect(BigNumber.from(nextId)).to.be.equal(BigNumber.from(1));
-    });
-
-    it("emits an event", async () => {
-      expect(addProposal)
-        .to.emit(tradeHubInstance, "ProposalAdded")
-        .withArgs(
-          1,
-          owner.address,
-          niftyAInstance.address,
-          niftyBInstance.address,
-          1,
-          2
-        );
-    });
-
-    describe("data storage", async () => {
-      beforeEach(async () => {
-        [
-          proposerAddress,
-          proposerTokenAddress,
-          counterpartTokenAddress,
-          proposerTokenId,
-          counterpartTokenId,
-        ] = await tradeHubInstance.proposals(0);
-      });
-
-      it("proposerAddress is address of owner", async () => {
-        expect(proposerAddress).to.equal(owner.address);
-      });
-
-      it("proposerTokenAddress is address of NiftyA", async () => {
-        expect(proposerTokenAddress).to.equal(niftyAInstance.address);
-      });
-
-      it("counterpartTokenAddress is address of NiftyB", async () => {
-        expect(counterpartTokenAddress).to.equal(niftyBInstance.address);
-      });
-
-      it("proposerTokenId is 1", async () => {
-        expect(BigNumber.from(proposerTokenId)).to.be.equal(BigNumber.from(1));
-      });
-
-      it("counterpartTokenId is 2", async () => {
-        expect(BigNumber.from(counterpartTokenId)).to.be.equal(
-          BigNumber.from(2)
-        );
-      });
     });
   });
 });

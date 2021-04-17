@@ -46,6 +46,13 @@ contract TradeHub {
     uint _proposerTokenId,
     uint _counterpartTokenId
   ) public {
+
+    require(isOwner(
+      _proposerTokenAddress,
+      _proposerTokenId
+      ),
+      "Proposer must be owner of proposed token");
+
     Proposal memory proposal = Proposal(
       msg.sender,
       _proposerTokenAddress,
@@ -54,6 +61,7 @@ contract TradeHub {
       _counterpartTokenId,
       true
     );
+
     proposals[numberProposals] = proposal;
     numberProposals++;
     emit ProposalAdded(
