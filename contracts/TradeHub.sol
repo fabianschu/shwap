@@ -2,7 +2,7 @@ pragma solidity ^0.7.6;
 
 import "hardhat/console.sol";
 
-contract Shwap {
+contract TradeHub {
   uint public numberProposals;
   
   mapping(uint => Proposal) public proposals;
@@ -40,12 +40,19 @@ contract Shwap {
     uint indexed newIdx
   );
     
-  function addProposal(
+  function listProposal(
     address _proposerTokenAddress,
     address _counterpartTokenAddress,
     uint _proposerTokenId,
     uint _counterpartTokenId
   ) public {
+
+    require(isOwner(
+      _proposerTokenAddress,
+      _proposerTokenId
+      ),
+      "Proposer must be owner of proposed token");
+
     Proposal memory proposal = Proposal(
       msg.sender,
       _proposerTokenAddress,
@@ -54,6 +61,7 @@ contract Shwap {
       _counterpartTokenId,
       true
     );
+
     proposals[numberProposals] = proposal;
     numberProposals++;
     emit ProposalAdded(
@@ -103,7 +111,19 @@ contract Shwap {
     );
     require(counterpartTransfer, "Transfer failure");
     
-    // clean up data structure
+    removeProposal(_idx);
+  }
+
+  function delistProposal(
+    uint _idx
+  ) public {
+    require(proposals[_idx].proposerAddress == msg.sender,
+      "You are not the owner of the proposed token"
+    );
+    removeProposal(_idx);
+  }
+
+  function removeProposal(uint _idx) internal {
     proposals[_idx] = proposals[numberProposals - 1];
     delete proposals[numberProposals - 1];
     emit IndexChange(numberProposals - 1, _idx);
