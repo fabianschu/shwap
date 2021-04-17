@@ -9,25 +9,25 @@ const { expect } = chai;
 
 describe("Specs: TestTradeHub contract", async () => {
   let owner, alice, bob;
-  let shwapInstance;
+  let tradeHubInstance;
   let niftyAInstance;
   let niftyBInstance;
 
   beforeEach(async () => {
     await deployments.fixture();
     [owner, alice, bob] = await ethers.getSigners();
-    shwapInstance = await ethers.getContract("TestTradeHub", owner.address);
+    tradeHubInstance = await ethers.getContract("TestTradeHub", owner.address);
   });
 
   describe("#transfer", async () => {
     describe("with approval", async () => {
       beforeEach(async () => {
         niftyAInstance = await ethers.getContract("NiftyA", owner.address);
-        await niftyAInstance.approve(shwapInstance.address, 1);
+        await niftyAInstance.approve(tradeHubInstance.address, 1);
       });
 
       it("ownership transferred from owner to alice", async () => {
-        await shwapInstance._transfer(
+        await tradeHubInstance._transfer(
           niftyAInstance.address,
           owner.address,
           alice.address,
@@ -38,7 +38,7 @@ describe("Specs: TestTradeHub contract", async () => {
 
       it("event is emitted in ERC721 contract", async () => {
         await expect(
-          shwapInstance._transfer(
+          tradeHubInstance._transfer(
             niftyAInstance.address,
             owner.address,
             alice.address,
@@ -59,7 +59,9 @@ describe("Specs: TestTradeHub contract", async () => {
 
     describe("without proposals", async () => {
       it("reverts transaction", async () => {
-        const acceptProposal = shwapInstance.connect(alice).acceptProposal(0);
+        const acceptProposal = tradeHubInstance
+          .connect(alice)
+          .acceptProposal(0);
         await expect(acceptProposal).to.be.revertedWith(
           "No proposals available"
         );
@@ -68,26 +70,30 @@ describe("Specs: TestTradeHub contract", async () => {
 
     describe("with nonexistent index", async () => {
       it("reverts transaction", async () => {
-        addProposal = await shwapInstance.addProposal(
+        addProposal = await tradeHubInstance.addProposal(
           niftyAInstance.address,
           niftyBInstance.address,
           1,
           2
         );
-        const acceptProposal = shwapInstance.connect(alice).acceptProposal(4);
+        const acceptProposal = tradeHubInstance
+          .connect(alice)
+          .acceptProposal(4);
         await expect(acceptProposal).to.be.revertedWith("Index does not exist");
       });
     });
 
     describe("without approvals", async () => {
       it("reverts transaction", async () => {
-        addProposal = await shwapInstance.addProposal(
+        addProposal = await tradeHubInstance.addProposal(
           niftyAInstance.address,
           niftyBInstance.address,
           1,
           2
         );
-        const acceptProposal = shwapInstance.connect(alice).acceptProposal(0);
+        const acceptProposal = tradeHubInstance
+          .connect(alice)
+          .acceptProposal(0);
         await expect(acceptProposal).to.be.revertedWith(
           "Insufficient approvals"
         );
@@ -96,13 +102,13 @@ describe("Specs: TestTradeHub contract", async () => {
 
     describe("with caller not being the counterpart", async () => {
       it("reverts transaction", async () => {
-        addProposal = await shwapInstance.addProposal(
+        addProposal = await tradeHubInstance.addProposal(
           niftyAInstance.address,
           niftyBInstance.address,
           1,
           2
         );
-        const acceptProposal = shwapInstance.connect(bob).acceptProposal(0);
+        const acceptProposal = tradeHubInstance.connect(bob).acceptProposal(0);
         await expect(acceptProposal).to.be.revertedWith("Not authorized");
       });
     });
@@ -111,18 +117,22 @@ describe("Specs: TestTradeHub contract", async () => {
       let acceptProposal;
 
       beforeEach(async () => {
-        await niftyAInstance.approve(shwapInstance.address, 1);
-        await niftyBInstance.connect(alice).approve(shwapInstance.address, 2);
-        addProposal = await shwapInstance.addProposal(
+        await niftyAInstance.approve(tradeHubInstance.address, 1);
+        await niftyBInstance
+          .connect(alice)
+          .approve(tradeHubInstance.address, 2);
+        addProposal = await tradeHubInstance.addProposal(
           niftyAInstance.address,
           niftyBInstance.address,
           1,
           2
         );
-        addSecondProposal = await shwapInstance
+        addSecondProposal = await tradeHubInstance
           .connect(alice)
           .addProposal(niftyBInstance.address, niftyAInstance.address, 2, 666);
-        acceptProposal = await shwapInstance.connect(alice).acceptProposal(0);
+        acceptProposal = await tradeHubInstance
+          .connect(alice)
+          .acceptProposal(0);
       });
 
       it("transfers ownership of NiftyA to Alice", async () => {
@@ -140,25 +150,25 @@ describe("Specs: TestTradeHub contract", async () => {
           counterpartTokenAddress,
           proposerTokenId,
           counterpartTokenId,
-        ] = await shwapInstance.proposals(0);
+        ] = await tradeHubInstance.proposals(0);
         expect(BigNumber.from(counterpartTokenId)).to.be.equal(
           BigNumber.from(666)
         );
       });
 
       it("removes last proposal", async () => {
-        [proposerAddress] = await shwapInstance.proposals(1);
+        [proposerAddress] = await tradeHubInstance.proposals(1);
         expect(BigNumber.from(proposerAddress)).to.be.equal(BigNumber.from(0));
       });
 
       it("emits an event IndexChange", async () => {
         expect(acceptProposal)
-          .to.emit(shwapInstance, "IndexChange")
+          .to.emit(tradeHubInstance, "IndexChange")
           .withArgs(1, 0);
       });
 
       it("decrements the number of proposals", async () => {
-        expect(await shwapInstance.numberProposals()).to.be.equal(1);
+        expect(await tradeHubInstance.numberProposals()).to.be.equal(1);
       });
     });
   });
@@ -167,7 +177,7 @@ describe("Specs: TestTradeHub contract", async () => {
     beforeEach(async () => {
       niftyAInstance = await ethers.getContract("NiftyA", owner.address);
       niftyBInstance = await ethers.getContract("NiftyB", alice.address);
-      await shwapInstance.addProposal(
+      await tradeHubInstance.addProposal(
         niftyAInstance.address,
         niftyBInstance.address,
         1,
@@ -176,37 +186,37 @@ describe("Specs: TestTradeHub contract", async () => {
     });
 
     it("when caller is owner of counterpart token, emits OwnershipConfirmation event", async () => {
-      const isOwner = await shwapInstance
+      const isOwner = await tradeHubInstance
         .connect(alice)
         ._isOwner(niftyBInstance.address, 2);
-      expect(isOwner).to.emit(shwapInstance, "OwnershipConfirmation");
+      expect(isOwner).to.emit(tradeHubInstance, "OwnershipConfirmation");
     });
 
     it("when NOT owner, doesn't emit OwnershipConfirmation event", async () => {
-      const isOwner = await shwapInstance
+      const isOwner = await tradeHubInstance
         .connect(owner)
         ._isOwner(niftyBInstance.address, 2);
-      expect(isOwner).not.to.emit(shwapInstance, "OwnershipConfirmation");
+      expect(isOwner).not.to.emit(tradeHubInstance, "OwnershipConfirmation");
     });
   });
 
   describe("#_isApproved", async () => {
     it("with approval emits ApprovalConfirmation event", async () => {
       niftyAInstance = await ethers.getContract("NiftyA", owner.address);
-      await niftyAInstance.approve(shwapInstance.address, 1);
-      const isApproved = await shwapInstance._isApproved(
+      await niftyAInstance.approve(tradeHubInstance.address, 1);
+      const isApproved = await tradeHubInstance._isApproved(
         niftyAInstance.address,
         1
       );
-      expect(isApproved).to.emit(shwapInstance, "ApprovalConfirmation");
+      expect(isApproved).to.emit(tradeHubInstance, "ApprovalConfirmation");
     });
 
     it("without approval doesnt emit event", async () => {
-      const isApproved = await shwapInstance._isApproved(
+      const isApproved = await tradeHubInstance._isApproved(
         niftyAInstance.address,
         1
       );
-      expect(isApproved).not.to.emit(shwapInstance, "ApprovalConfirmation");
+      expect(isApproved).not.to.emit(tradeHubInstance, "ApprovalConfirmation");
     });
   });
 
@@ -217,40 +227,43 @@ describe("Specs: TestTradeHub contract", async () => {
     });
 
     it("with all approvals emits AllApprovalConfirmation event", async () => {
-      await niftyAInstance.approve(shwapInstance.address, 1);
-      await niftyBInstance.approve(shwapInstance.address, 2);
-      const isAllApproved = await shwapInstance._isAllApproved(
+      await niftyAInstance.approve(tradeHubInstance.address, 1);
+      await niftyBInstance.approve(tradeHubInstance.address, 2);
+      const isAllApproved = await tradeHubInstance._isAllApproved(
         niftyAInstance.address,
         niftyBInstance.address,
         1,
         2
       );
-      expect(isAllApproved).to.emit(shwapInstance, "AllApprovalConfirmation");
+      expect(isAllApproved).to.emit(
+        tradeHubInstance,
+        "AllApprovalConfirmation"
+      );
     });
 
     it("with only one approval doesn't emit AllApprovalConfirmation event", async () => {
-      await niftyBInstance.approve(shwapInstance.address, 2);
-      const isAllApproved = await shwapInstance._isAllApproved(
+      await niftyBInstance.approve(tradeHubInstance.address, 2);
+      const isAllApproved = await tradeHubInstance._isAllApproved(
         niftyAInstance.address,
         niftyBInstance.address,
         1,
         2
       );
       expect(isAllApproved).not.to.emit(
-        shwapInstance,
+        tradeHubInstance,
         "AllApprovalConfirmation"
       );
     });
 
     it("without approval doesnt emit event", async () => {
-      const isAllApproved = await shwapInstance._isAllApproved(
+      const isAllApproved = await tradeHubInstance._isAllApproved(
         niftyAInstance.address,
         niftyBInstance.address,
         1,
         2
       );
       expect(isAllApproved).not.to.emit(
-        shwapInstance,
+        tradeHubInstance,
         "AllApprovalConfirmation"
       );
     });
@@ -267,7 +280,7 @@ describe("Specs: TestTradeHub contract", async () => {
     beforeEach(async () => {
       niftyAInstance = await ethers.getContract("NiftyA", owner.address);
       niftyBInstance = await ethers.getContract("NiftyB", owner.address);
-      addProposal = await shwapInstance.addProposal(
+      addProposal = await tradeHubInstance.addProposal(
         niftyAInstance.address,
         niftyBInstance.address,
         1,
@@ -276,13 +289,13 @@ describe("Specs: TestTradeHub contract", async () => {
     });
 
     it("increments the numberProposals", async () => {
-      const nextId = await shwapInstance.numberProposals();
+      const nextId = await tradeHubInstance.numberProposals();
       expect(BigNumber.from(nextId)).to.be.equal(BigNumber.from(1));
     });
 
     it("emits an event", async () => {
       expect(addProposal)
-        .to.emit(shwapInstance, "ProposalAdded")
+        .to.emit(tradeHubInstance, "ProposalAdded")
         .withArgs(
           1,
           owner.address,
@@ -301,7 +314,7 @@ describe("Specs: TestTradeHub contract", async () => {
           counterpartTokenAddress,
           proposerTokenId,
           counterpartTokenId,
-        ] = await shwapInstance.proposals(0);
+        ] = await tradeHubInstance.proposals(0);
       });
 
       it("proposerAddress is address of owner", async () => {
