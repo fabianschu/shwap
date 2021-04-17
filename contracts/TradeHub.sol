@@ -40,7 +40,7 @@ contract TradeHub {
     uint indexed newIdx
   );
     
-  function addProposal(
+  function listProposal(
     address _proposerTokenAddress,
     address _counterpartTokenAddress,
     uint _proposerTokenId,
@@ -116,6 +116,15 @@ contract TradeHub {
     delete proposals[numberProposals - 1];
     emit IndexChange(numberProposals - 1, _idx);
     numberProposals--;
+  }
+
+  function removeProposal(
+    uint _idx
+  ) public {
+    require(proposals[_idx].proposerAddress == msg.sender,
+      "You are not the owner of the proposed token"
+    );
+
   }
 
   function isOwner(

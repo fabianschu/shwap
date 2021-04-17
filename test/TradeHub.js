@@ -70,7 +70,7 @@ describe("Specs: TestTradeHub contract", async () => {
 
     describe("with nonexistent index", async () => {
       it("reverts transaction", async () => {
-        addProposal = await tradeHubInstance.addProposal(
+        listProposal = await tradeHubInstance.listProposal(
           niftyAInstance.address,
           niftyBInstance.address,
           1,
@@ -85,7 +85,7 @@ describe("Specs: TestTradeHub contract", async () => {
 
     describe("without approvals", async () => {
       it("reverts transaction", async () => {
-        addProposal = await tradeHubInstance.addProposal(
+        listProposal = await tradeHubInstance.listProposal(
           niftyAInstance.address,
           niftyBInstance.address,
           1,
@@ -102,7 +102,7 @@ describe("Specs: TestTradeHub contract", async () => {
 
     describe("with caller not being the counterpart", async () => {
       it("reverts transaction", async () => {
-        addProposal = await tradeHubInstance.addProposal(
+        listProposal = await tradeHubInstance.listProposal(
           niftyAInstance.address,
           niftyBInstance.address,
           1,
@@ -121,7 +121,7 @@ describe("Specs: TestTradeHub contract", async () => {
         await niftyBInstance
           .connect(alice)
           .approve(tradeHubInstance.address, 2);
-        addProposal = await tradeHubInstance.addProposal(
+        listProposal = await tradeHubInstance.listProposal(
           niftyAInstance.address,
           niftyBInstance.address,
           1,
@@ -129,7 +129,7 @@ describe("Specs: TestTradeHub contract", async () => {
         );
         addSecondProposal = await tradeHubInstance
           .connect(alice)
-          .addProposal(niftyBInstance.address, niftyAInstance.address, 2, 666);
+          .listProposal(niftyBInstance.address, niftyAInstance.address, 2, 666);
         acceptProposal = await tradeHubInstance
           .connect(alice)
           .acceptProposal(0);
@@ -173,20 +173,20 @@ describe("Specs: TestTradeHub contract", async () => {
     });
   });
 
-  describe("#addProposal", async () => {
+  describe("#listProposal", async () => {
     describe("caller is NOT owner of proposed token", async () => {
-      let addProposal;
+      let listProposal;
 
       beforeEach(async () => {
         niftyAInstance = await ethers.getContract("NiftyA", owner.address);
         niftyBInstance = await ethers.getContract("NiftyB", owner.address);
-        addProposal = tradeHubInstance
+        listProposal = tradeHubInstance
           .connect(alice)
-          .addProposal(niftyAInstance.address, niftyBInstance.address, 1, 2);
+          .listProposal(niftyAInstance.address, niftyBInstance.address, 1, 2);
       });
 
       it("reverts the transaction", async () => {
-        await expect(addProposal).to.be.revertedWith(
+        await expect(listProposal).to.be.revertedWith(
           "Proposer must be owner of proposed token"
         );
       });
@@ -198,12 +198,12 @@ describe("Specs: TestTradeHub contract", async () => {
         counterpartTokenAddress,
         proposerTokenId,
         counterpartTokenId,
-        addProposal;
+        listProposal;
 
       beforeEach(async () => {
         niftyAInstance = await ethers.getContract("NiftyA", owner.address);
         niftyBInstance = await ethers.getContract("NiftyB", owner.address);
-        addProposal = await tradeHubInstance.addProposal(
+        listProposal = await tradeHubInstance.listProposal(
           niftyAInstance.address,
           niftyBInstance.address,
           1,
@@ -217,7 +217,7 @@ describe("Specs: TestTradeHub contract", async () => {
       });
 
       it("emits an event", async () => {
-        expect(addProposal)
+        expect(listProposal)
           .to.emit(tradeHubInstance, "ProposalAdded")
           .withArgs(
             1,
@@ -267,25 +267,46 @@ describe("Specs: TestTradeHub contract", async () => {
     });
   });
 
-  // desctibe("#removeProposal", async () => {
-  //   beforeEach(async () => {
-  //     niftyAInstance = await ethers.getContract("NiftyA", owner.address);
-  //     niftyBInstance = await ethers.getContract("NiftyB", alice.address);
-  //     await tradeHubInstance.addProposal(
-  //       niftyAInstance.address,
-  //       niftyBInstance.address,
-  //       1,
-  //       2
-  //     );
-  //   });
+  describe("#removeProposal", async () => {
+    let removeProposal;
 
-  // })
+    beforeEach(async () => {
+      niftyAInstance = await ethers.getContract("NiftyA", owner.address);
+      niftyBInstance = await ethers.getContract("NiftyB", alice.address);
+      await tradeHubInstance.listProposal(
+        niftyAInstance.address,
+        niftyBInstance.address,
+        1,
+        2
+      );
+    });
+
+    describe("caller is NOT owner of proposed token", async () => {
+      beforeEach(async () => {
+        removeProposal = tradeHubInstance.connect(alice).removeProposal(0);
+      });
+
+      it("reverts the transaction", async () => {
+        await expect(removeProposal).to.be.revertedWith(
+          "You are not the owner of the proposed token"
+        );
+      });
+    });
+
+    describe("caller is owner of proposed token", async () => {
+      beforeEach(async () => {
+        await tradeHubInstance.removeProposal(0);
+      });
+
+      it("removes the proposal", async () => {});
+    });
+  });
 
   describe("#_isOwner", async () => {
     beforeEach(async () => {
       niftyAInstance = await ethers.getContract("NiftyA", owner.address);
       niftyBInstance = await ethers.getContract("NiftyB", alice.address);
-      await tradeHubInstance.addProposal(
+      await tradeHubInstance.listProposal(
         niftyAInstance.address,
         niftyBInstance.address,
         1,
