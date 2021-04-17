@@ -7,7 +7,7 @@ chai.use(solidity);
 
 const { expect } = chai;
 
-describe("Specs: TestShwap contract", async () => {
+describe("Specs: TestTradeHub contract", async () => {
   let owner, alice, bob;
   let shwapInstance;
   let niftyAInstance;
@@ -16,7 +16,7 @@ describe("Specs: TestShwap contract", async () => {
   beforeEach(async () => {
     await deployments.fixture();
     [owner, alice, bob] = await ethers.getSigners();
-    shwapInstance = await ethers.getContract("TestShwap", owner.address);
+    shwapInstance = await ethers.getContract("TestTradeHub", owner.address);
   });
 
   describe("#transfer", async () => {

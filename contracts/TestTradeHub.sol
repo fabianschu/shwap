@@ -1,8 +1,8 @@
 pragma solidity ^0.7.6;
 
-import "./Shwap.sol";
+import "./TradeHub.sol";
 
-contract TestShwap is Shwap {
+contract TestTradeHub is TradeHub {
   event ApprovalConfirmation();
   event AllApprovalConfirmation();
   event OwnershipConfirmation();

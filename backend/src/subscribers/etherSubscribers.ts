@@ -1,19 +1,19 @@
 import { ethers } from "ethers";
 import { Container } from "typedi";
 import ProposalService from "../../src/services/proposalService";
-import * as shwapInterface from "../../../artifacts/contracts/Shwap.sol/Shwap.json";
+import * as shwapInterface from "../../../artifacts/contracts/TradeHub.sol/TradeHub.json";
 
 const provider = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545/");
 
 const contracts = () => ({
-  shwapContract: new ethers.Contract(
+  tradeHubContract: new ethers.Contract(
     "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
     shwapInterface.abi,
     provider
   ),
 });
 
-const { shwapContract } = contracts();
+const { tradeHubContract } = contracts();
 
 export const subscribeToEthereum = () => {
   if (process.env.NODE_ENV == "test") return;
@@ -29,7 +29,7 @@ export const subscribeToEthereum = () => {
 const proposalEvents = () => {
   const proposalServiceInstance = Container.get(ProposalService);
 
-  shwapContract.on(
+  tradeHubContract.on(
     "ProposalAdded",
     (
       index,
@@ -50,7 +50,7 @@ const proposalEvents = () => {
     }
   );
 
-  shwapContract.on("IndexChange", (oldLastIdx, filledIndex) => {
+  tradeHubContract.on("IndexChange", (oldLastIdx, filledIndex) => {
     console.log({ oldLastIdx, filledIndex });
     // proposalServiceInstance.maintainOrder({
     //   filledIndex,
