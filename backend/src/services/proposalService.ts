@@ -20,7 +20,10 @@ export default class ProposalService {
   ): Promise<IProposal | any> {
     const parsedProposal = this.parseFromBigNumbers(proposalDTO);
     try {
-      return await this.proposalRepository.save(parsedProposal);
+      return await this.proposalRepository.save({
+        ...parsedProposal,
+        status: "open",
+      });
     } catch (e) {
       this.logger.error(`🔥 Error saving proposal`, e);
       throw e;
@@ -35,7 +38,11 @@ export default class ProposalService {
     try {
       const removeIndex = SaveIndexDTO.filledIndex.toNumber();
       const newLastIndex = SaveIndexDTO.newLastIndex.toNumber();
-      await this.proposalRepository.delete({ index: removeIndex });
+
+      await this.proposalRepository.update(
+        { index: removeIndex },
+        { index: null, status: "filled" }
+      );
       await this.proposalRepository.update(
         { index: newLastIndex + 1 },
         { index: removeIndex }
