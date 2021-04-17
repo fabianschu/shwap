@@ -10,7 +10,7 @@ import { Proposal } from "../../src/entity/Proposal";
 import ProposalServiceDTO from "../_fixtures/proposalAddedEvent";
 import IndexChangeDTO from "../_fixtures/indexChangeEvent";
 
-describe("AuthService", () => {
+describe("ProposalService", () => {
   let proposalServiceInstance: ProposalService;
   let connection: Connection;
   let proposalRepository: Repository<Proposal>;
@@ -56,17 +56,35 @@ describe("AuthService", () => {
   });
 
   describe("#MaintainOrder", () => {
+    afterEach(async () => {
+      await proposalRepository.query("DELETE FROM proposals;");
+    });
+
     describe("with only one proposal", () => {
-      it("removes accepted proposal from db", async () => {
-        await proposalServiceInstance.SaveProposal(ProposalServiceDTO);
+      beforeEach(async () => {
+        await proposalServiceInstance.SaveProposal({
+          ...ProposalServiceDTO,
+          proposerTokenId: BigNumber.from(0),
+          counterpartTokenId: BigNumber.from(0),
+        });
+        await proposalServiceInstance.MaintainOrder({
+          filledIndex: BigNumber.from(0),
+          newLastIndex: BigNumber.from(0),
+        });
+      });
 
-        const proposalAmountPre = await proposalRepository.count();
+      it("changes the accepted proposal's status to 'filled' ", async () => {
+        const { status } = await proposalRepository.findOne({
+          proposerTokenId: 0,
+        });
+        expect(status).toEqual("filled");
+      });
 
-        await proposalServiceInstance.MaintainOrder(IndexChangeDTO);
-        const proposalAmountPost = await proposalRepository.count();
-
-        // const { message } = await authServiceInstance.SignUp(userInputDTO);
-        expect(proposalAmountPost).toEqual(0);
+      it("sets the index of accepted proposal to null ", async () => {
+        const { index } = await proposalRepository.findOne({
+          proposerTokenId: 0,
+        });
+        expect(index).toBeNull();
       });
     });
 
@@ -92,7 +110,7 @@ describe("AuthService", () => {
         });
       });
 
-      describe("when removing the first proposal", () => {
+      describe("when first proposal was accepted", () => {
         const filledIndex = 0;
         const newLastIndex = 1;
 
@@ -103,14 +121,18 @@ describe("AuthService", () => {
           });
         });
 
-        afterEach(async () => {
-          await proposalRepository.query("DELETE FROM proposals;");
+        it("sets status of first proposal to 'filled'", async () => {
+          const { status } = await proposalRepository.findOne({
+            proposerTokenId: 0,
+          });
+          expect(status).toEqual("filled");
         });
 
-        it("removes first proposal from db", async () => {
-          expect(
-            await proposalRepository.findOne({ proposerTokenId: 0 })
-          ).toBeUndefined();
+        it("sets index of first proposal to null", async () => {
+          const { index } = await proposalRepository.findOne({
+            proposerTokenId: 0,
+          });
+          expect(index).toEqual(null);
         });
 
         it("changes the index of the previously last-indexed proposal to zero", async () => {
@@ -133,14 +155,20 @@ describe("AuthService", () => {
           });
         });
 
-        afterEach(async () => {
-          await proposalRepository.query("DELETE FROM proposals;");
+        it("sets status of accepted proposal to 'filled' ", async () => {
+          const { status } = await proposalRepository.findOne({
+            proposerTokenId: 1,
+          });
+
+          expect(status).toEqual("filled");
         });
 
-        it("removes second proposal (index = 1) from db", async () => {
-          expect(
-            await proposalRepository.findOne({ proposerTokenId: 1 })
-          ).toBeUndefined();
+        it("sets index of accepted proposal to null ", async () => {
+          const { index } = await proposalRepository.findOne({
+            proposerTokenId: 1,
+          });
+
+          expect(index).toBeNull();
         });
 
         it("changes the index of the previously last-indexed proposal to one", async () => {
@@ -163,28 +191,20 @@ describe("AuthService", () => {
           });
         });
 
-        afterEach(async () => {
-          await proposalRepository.query("DELETE FROM proposals;");
+        it("sets status of accepted proposal to 'filled' ", async () => {
+          const { status } = await proposalRepository.findOne({
+            proposerTokenId: 2,
+          });
+
+          expect(status).toEqual("filled");
         });
 
-        it("removes third proposal (index = 2) from db", async () => {
-          expect(
-            await proposalRepository.findOne({ proposerTokenId: 2 })
-          ).toBeUndefined();
-        });
+        it("sets index of accepted proposal to null ", async () => {
+          const { index } = await proposalRepository.findOne({
+            proposerTokenId: 2,
+          });
 
-        it("changes no indices", async () => {
-          const firstProposal = await proposalRepository.findOne({
-            proposerTokenId: 0,
-          });
-          const secondProposal = await proposalRepository.findOne({
-            proposerTokenId: 1,
-          });
-          console.log(
-            await proposalRepository.query("SELECT * FROM proposals;")
-          );
-          expect(firstProposal.index).toEqual(0);
-          expect(secondProposal.index).toEqual(1);
+          expect(index).toBeNull();
         });
       });
     });
