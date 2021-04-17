@@ -111,11 +111,7 @@ contract TradeHub {
     );
     require(counterpartTransfer, "Transfer failure");
     
-    // clean up data structure
-    proposals[_idx] = proposals[numberProposals - 1];
-    delete proposals[numberProposals - 1];
-    emit IndexChange(numberProposals - 1, _idx);
-    numberProposals--;
+    removeProposal(_idx);
   }
 
   function delistProposal(
@@ -124,7 +120,14 @@ contract TradeHub {
     require(proposals[_idx].proposerAddress == msg.sender,
       "You are not the owner of the proposed token"
     );
+    removeProposal(_idx);
+  }
 
+  function removeProposal(uint _idx) internal {
+    proposals[_idx] = proposals[numberProposals - 1];
+    delete proposals[numberProposals - 1];
+    emit IndexChange(numberProposals - 1, _idx);
+    numberProposals--;
   }
 
   function isOwner(

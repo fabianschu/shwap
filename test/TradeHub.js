@@ -298,7 +298,10 @@ describe("Specs: TestTradeHub contract", async () => {
         await tradeHubInstance.delistProposal(0);
       });
 
-      it("removes the proposal", async () => {});
+      it("proposerAddress is address of owner", async () => {
+        const proposal = await tradeHubInstance.proposals(0);
+        expect(proposal.exists).to.equal(false);
+      });
     });
   });
 
