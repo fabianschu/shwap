@@ -8,7 +8,9 @@ require("hardhat-deploy-ethers");
  */
 
 module.exports = {
-  solidity: "0.7.6",
+  solidity: {
+    compilers: [{ version: "0.8.4" }],
+  },
   // networks: {
   //   hardhat: {
   //     mining: {
