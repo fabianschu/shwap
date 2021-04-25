@@ -6,12 +6,15 @@ import {
   IIndexChangeDTO,
 } from "../interfaces/IProposal";
 import { Proposal } from "../entity/Proposal";
+import { User } from "../entity/User";
 
 @Service()
 export default class ProposalService {
   constructor(
     @Inject("proposalRepository")
     private proposalRepository: Repository<Proposal>,
+    @Inject("userRepository")
+    private userRepository: Repository<User>,
     @Inject("logger") private logger
   ) {}
 
@@ -20,10 +23,15 @@ export default class ProposalService {
   ): Promise<IProposal | any> {
     const parsedProposal = this.parseFromBigNumbers(proposalDTO);
     try {
-      return await this.proposalRepository.save({
+      const user = await this.userRepository.findOne({
+        pubAddr: parsedProposal.proposerAddress,
+      });
+      const proposal = await this.proposalRepository.save({
         ...parsedProposal,
         status: "open",
+        user: user,
       });
+      return proposal;
     } catch (e) {
       this.logger.error(`🔥 Error saving proposal`, e);
       throw e;

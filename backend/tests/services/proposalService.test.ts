@@ -7,13 +7,14 @@ import {
 import { BigNumber } from "@ethersproject/bignumber";
 import ProposalService from "../../src/services/ProposalService";
 import { Proposal } from "../../src/entity/Proposal";
+import { User } from "../../src/entity/User";
 import ProposalServiceDTO from "../_fixtures/proposalAddedEvent";
-import IndexChangeDTO from "../_fixtures/indexChangeEvent";
 
 describe("ProposalService", () => {
   let proposalServiceInstance: ProposalService;
   let connection: Connection;
   let proposalRepository: Repository<Proposal>;
+  let userRepository: Repository<User>;
 
   const mockLoggerInstance = {
     error() {},
@@ -23,8 +24,10 @@ describe("ProposalService", () => {
   beforeAll(async () => {
     connection = await createConnection();
     proposalRepository = getRepository(Proposal);
+    userRepository = getRepository(User);
     proposalServiceInstance = new ProposalService(
       proposalRepository,
+      userRepository,
       mockLoggerInstance
     );
   });
@@ -35,13 +38,20 @@ describe("ProposalService", () => {
 
   afterEach(async () => {
     await proposalRepository.query("DELETE FROM proposals;");
+    await userRepository.query("DELETE FROM users;");
   });
 
   describe("#SaveProposal", () => {
-    let id;
+    let id: number;
+
+    const userAddress = ProposalServiceDTO.proposerAddress;
 
     beforeEach(async () => {
-      id = await proposalServiceInstance.SaveProposal(ProposalServiceDTO);
+      await userRepository.save({ pubAddr: userAddress, nonce: "abc" });
+      const proposal = await proposalServiceInstance.SaveProposal(
+        ProposalServiceDTO
+      );
+      id = proposal.id;
     });
 
     it("creates a new proposal in the database", async () => {
@@ -52,6 +62,13 @@ describe("ProposalService", () => {
     it("sets the proposal status to 'open' ", async () => {
       const newProposal = await proposalRepository.findOne(id);
       expect(newProposal.status).toEqual("open");
+    });
+
+    it("lets the proposal reference a user", async () => {
+      const newProposal = await proposalRepository.findOne(id, {
+        relations: ["user"],
+      });
+      expect(newProposal.user.pubAddr).toEqual(userAddress);
     });
   });
 
