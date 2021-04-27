@@ -1,6 +1,7 @@
 pragma solidity ^0.8.4;
 
 import "hardhat/console.sol";
+import "./interfaces/IERC721.sol";
 
 contract TradeHub {
   uint public numberProposals;
@@ -46,7 +47,8 @@ contract TradeHub {
     uint _proposerTokenId,
     uint _counterpartTokenId
   ) public {
-
+    // ERC721 ierc721 = ERC721(_proposerTokenAddress);
+    
     require(isOwner(
       _proposerTokenAddress,
       _proposerTokenId
@@ -130,20 +132,15 @@ contract TradeHub {
     numberProposals--;
   }
 
+
+
   function isOwner(
     address _tokenAddress,
     uint _tokenId
   ) internal returns(bool) {
-    (
-      bool success,
-      bytes memory data
-    ) = _tokenAddress.call(
-      abi.encodeWithSignature(
-        "ownerOf(uint256)",
-        _tokenId
-      )
-    );
-    (address ownerAddress) = abi.decode(data, (address));
+    IERC721 erc721 = IERC721(_tokenAddress);
+    address ownerAddress = erc721.ownerOf(_tokenId);
+
     return ownerAddress == msg.sender;
   }
 
