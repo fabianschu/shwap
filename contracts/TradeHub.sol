@@ -132,8 +132,6 @@ contract TradeHub {
     numberProposals--;
   }
 
-
-
   function isOwner(
     address _tokenAddress,
     uint _tokenId
@@ -149,7 +147,7 @@ contract TradeHub {
     address _counterpartTokenAddress,
     uint _proposerTokenId,
     uint _counterpartTokenId
-  ) internal returns(bool) {
+  ) internal view returns(bool) {
     return isApproved(_proposerTokenAddress, _proposerTokenId)
       && isApproved(_counterpartTokenAddress, _counterpartTokenId);
   }
