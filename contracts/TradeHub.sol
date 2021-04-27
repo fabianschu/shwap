@@ -160,17 +160,6 @@ contract TradeHub {
   ) internal view returns(bool) {
     IERC721 erc721 = IERC721(_tokenAddress);
     address approvedAddress = erc721.getApproved(_tokenId);
-    // return true;
-    // (
-    //   bool success,
-    //   bytes memory data
-    // ) = _tokenAddress.call(
-    //   abi.encodeWithSignature(
-    //     "getApproved(uint256)",
-    //     _tokenId
-    //   )
-    // );
-    // (address approvedAddress) = abi.decode(data, (address));
     return approvedAddress == address(this);
   }
 
