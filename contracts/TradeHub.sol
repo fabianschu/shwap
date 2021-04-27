@@ -47,8 +47,6 @@ contract TradeHub {
     uint _proposerTokenId,
     uint _counterpartTokenId
   ) public {
-    // ERC721 ierc721 = ERC721(_proposerTokenAddress);
-    
     require(isOwner(
       _proposerTokenAddress,
       _proposerTokenId
