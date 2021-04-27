@@ -137,9 +137,9 @@ contract TradeHub {
   function isOwner(
     address _tokenAddress,
     uint _tokenId
-  ) internal returns(bool) {
-    IERC721 erc721 = IERC721(_tokenAddress);
-    address ownerAddress = erc721.ownerOf(_tokenId);
+  ) internal view returns(bool) {
+      IERC721 erc721 = IERC721(_tokenAddress);
+      address ownerAddress = erc721.ownerOf(_tokenId);
 
     return ownerAddress == msg.sender;
   }
@@ -157,17 +157,20 @@ contract TradeHub {
   function isApproved(
     address _tokenAddress,
     uint _tokenId
-  ) internal returns(bool) {
-    (
-      bool success,
-      bytes memory data
-    ) = _tokenAddress.call(
-      abi.encodeWithSignature(
-        "getApproved(uint256)",
-        _tokenId
-      )
-    );
-    (address approvedAddress) = abi.decode(data, (address));
+  ) internal view returns(bool) {
+    IERC721 erc721 = IERC721(_tokenAddress);
+    address approvedAddress = erc721.getApproved(_tokenId);
+    // return true;
+    // (
+    //   bool success,
+    //   bytes memory data
+    // ) = _tokenAddress.call(
+    //   abi.encodeWithSignature(
+    //     "getApproved(uint256)",
+    //     _tokenId
+    //   )
+    // );
+    // (address approvedAddress) = abi.decode(data, (address));
     return approvedAddress == address(this);
   }
 
@@ -177,18 +180,9 @@ contract TradeHub {
     address _toAddress,
     uint _tokenId
   ) internal returns(bool){
-    (
-      bool success,
-      bytes memory data
-    ) = _tokenAddress.call(
-      abi.encodeWithSignature(
-        "transferFrom(address,address,uint256)",
-        _fromAddress,
-        _toAddress,
-        _tokenId
-      )
-    );
-    return success;
+    IERC721 erc721 = IERC721(_tokenAddress);
+    erc721.safeTransferFrom(_fromAddress, _toAddress, _tokenId);
+    return true;
   }
 
 }
