@@ -1,6 +1,7 @@
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.4;
 
 import "hardhat/console.sol";
+import "./interfaces/IERC721.sol";
 
 contract TradeHub {
   uint public numberProposals;
@@ -46,7 +47,6 @@ contract TradeHub {
     uint _proposerTokenId,
     uint _counterpartTokenId
   ) public {
-
     require(isOwner(
       _proposerTokenAddress,
       _proposerTokenId
@@ -133,17 +133,10 @@ contract TradeHub {
   function isOwner(
     address _tokenAddress,
     uint _tokenId
-  ) internal returns(bool) {
-    (
-      bool success,
-      bytes memory data
-    ) = _tokenAddress.call(
-      abi.encodeWithSignature(
-        "ownerOf(uint256)",
-        _tokenId
-      )
-    );
-    (address ownerAddress) = abi.decode(data, (address));
+  ) internal view returns(bool) {
+      IERC721 erc721 = IERC721(_tokenAddress);
+      address ownerAddress = erc721.ownerOf(_tokenId);
+
     return ownerAddress == msg.sender;
   }
 
@@ -152,7 +145,7 @@ contract TradeHub {
     address _counterpartTokenAddress,
     uint _proposerTokenId,
     uint _counterpartTokenId
-  ) internal returns(bool) {
+  ) internal view returns(bool) {
     return isApproved(_proposerTokenAddress, _proposerTokenId)
       && isApproved(_counterpartTokenAddress, _counterpartTokenId);
   }
@@ -160,17 +153,9 @@ contract TradeHub {
   function isApproved(
     address _tokenAddress,
     uint _tokenId
-  ) internal returns(bool) {
-    (
-      bool success,
-      bytes memory data
-    ) = _tokenAddress.call(
-      abi.encodeWithSignature(
-        "getApproved(uint256)",
-        _tokenId
-      )
-    );
-    (address approvedAddress) = abi.decode(data, (address));
+  ) internal view returns(bool) {
+    IERC721 erc721 = IERC721(_tokenAddress);
+    address approvedAddress = erc721.getApproved(_tokenId);
     return approvedAddress == address(this);
   }
 
@@ -180,18 +165,9 @@ contract TradeHub {
     address _toAddress,
     uint _tokenId
   ) internal returns(bool){
-    (
-      bool success,
-      bytes memory data
-    ) = _tokenAddress.call(
-      abi.encodeWithSignature(
-        "transferFrom(address,address,uint256)",
-        _fromAddress,
-        _toAddress,
-        _tokenId
-      )
-    );
-    return success;
+    IERC721 erc721 = IERC721(_tokenAddress);
+    erc721.safeTransferFrom(_fromAddress, _toAddress, _tokenId);
+    return true;
   }
 
 }
