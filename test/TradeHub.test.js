@@ -86,11 +86,18 @@ describe("Specs: TestTradeHub contract", async () => {
   });
 
   describe("#acceptProposal", async () => {
+    let listProposal;
+    let acceptProposal;
+    let listSecondProposal;
+    let proposerAddress,
+      proposerTokenAddress,
+      counterpartTokenAddress,
+      proposerTokenId,
+      counterpartTokenId;
+
     describe("without proposals", async () => {
       it("reverts transaction", async () => {
-        const acceptProposal = tradeHubInstance
-          .connect(alice)
-          .acceptProposal(0);
+        acceptProposal = tradeHubInstance.connect(alice).acceptProposal(0);
         await expect(acceptProposal).to.be.revertedWith(
           "No proposals available"
         );
@@ -120,9 +127,7 @@ describe("Specs: TestTradeHub contract", async () => {
           1,
           2
         );
-        const acceptProposal = tradeHubInstance
-          .connect(alice)
-          .acceptProposal(0);
+        acceptProposal = tradeHubInstance.connect(alice).acceptProposal(0);
         await expect(acceptProposal).to.be.revertedWith(
           "Insufficient approvals"
         );
@@ -137,75 +142,114 @@ describe("Specs: TestTradeHub contract", async () => {
           1,
           2
         );
-        const acceptProposal = tradeHubInstance.connect(bob).acceptProposal(0);
+        acceptProposal = tradeHubInstance.connect(bob).acceptProposal(0);
         await expect(acceptProposal).to.be.revertedWith("Not authorized");
       });
     });
 
     describe("with all approvals and valid ownership", async () => {
-      let acceptProposal;
+      let counterpartTokenId;
 
       beforeEach(async () => {
         await niftyAInstance.approve(tradeHubInstance.address, 1);
         await niftyBInstance
           .connect(alice)
           .approve(tradeHubInstance.address, 2);
-        listProposal = await tradeHubInstance.listProposal(
-          niftyAInstance.address,
-          niftyBInstance.address,
-          1,
-          2
-        );
-        addSecondProposal = await tradeHubInstance
-          .connect(alice)
-          .listProposal(niftyBInstance.address, niftyAInstance.address, 2, 666);
-        acceptProposal = await tradeHubInstance
-          .connect(alice)
-          .acceptProposal(0);
       });
 
-      it("transfers ownership of NiftyA to Alice", async () => {
-        expect(await niftyAInstance.balanceOf(alice.address)).to.equal(1);
+      describe("with specified counterpartTokenId", () => {
+        counterpartTokenId = 2;
+
+        beforeEach(async () => {
+          listProposal = await tradeHubInstance.listProposal(
+            niftyAInstance.address,
+            niftyBInstance.address,
+            1,
+            counterpartTokenId
+          );
+          acceptProposal = await tradeHubInstance
+            .connect(alice)
+            .acceptProposal(0);
+        });
+
+        it("transfers ownership of NiftyA to Alice", async () => {
+          expect(await niftyAInstance.balanceOf(alice.address)).to.equal(1);
+        });
+
+        it("transfers ownership of NiftyB to Owner", async () => {
+          expect(await niftyBInstance.balanceOf(owner.address)).to.equal(1);
+        });
       });
 
-      it("transfers ownership of NiftyB to Owner", async () => {
-        expect(await niftyBInstance.balanceOf(owner.address)).to.equal(1);
-      });
+      describe("with multiple proposals available", () => {
+        counterpartTokenId = 2;
 
-      it("moves last proposal to id of successful swap", async () => {
-        [
-          proposerAddress,
-          proposerTokenAddress,
-          counterpartTokenAddress,
-          proposerTokenId,
-          counterpartTokenId,
-        ] = await tradeHubInstance.proposals(0);
-        expect(BigNumber.from(counterpartTokenId)).to.be.equal(
-          BigNumber.from(666)
-        );
-      });
+        beforeEach(async () => {
+          await niftyBInstance.mint(alice.address, 666);
+          await niftyBInstance
+            .connect(alice)
+            .approve(tradeHubInstance.address, 666);
+          listProposal = await tradeHubInstance.listProposal(
+            niftyAInstance.address,
+            niftyBInstance.address,
+            1,
+            counterpartTokenId
+          );
+          listSecondProposal = await tradeHubInstance
+            .connect(alice)
+            .listProposal(
+              niftyBInstance.address,
+              niftyAInstance.address,
+              2,
+              666
+            );
+          acceptProposal = await tradeHubInstance
+            .connect(alice)
+            .acceptProposal(0);
+        });
 
-      it("removes last proposal", async () => {
-        [proposerAddress] = await tradeHubInstance.proposals(1);
-        expect(BigNumber.from(proposerAddress)).to.be.equal(BigNumber.from(0));
-      });
+        it("moves last proposal to id of successful swap", async () => {
+          [
+            proposerAddress,
+            proposerTokenAddress,
+            counterpartTokenAddress,
+            proposerTokenId,
+            counterpartTokenId,
+          ] = await tradeHubInstance.proposals(0);
+          expect(BigNumber.from(counterpartTokenId)).to.be.equal(
+            BigNumber.from(666)
+          );
+        });
 
-      it("emits an event IndexChange", async () => {
-        expect(acceptProposal)
-          .to.emit(tradeHubInstance, "IndexChange")
-          .withArgs(1, 0);
-      });
+        it("removes last proposal", async () => {
+          [proposerAddress] = await tradeHubInstance.proposals(1);
+          expect(BigNumber.from(proposerAddress)).to.be.equal(
+            BigNumber.from(0)
+          );
+        });
 
-      it("decrements the number of proposals", async () => {
-        expect(await tradeHubInstance.numberProposals()).to.be.equal(1);
+        it("emits an event IndexChange", async () => {
+          expect(acceptProposal)
+            .to.emit(tradeHubInstance, "IndexChange")
+            .withArgs(1, 0);
+        });
+
+        it("decrements the number of proposals", async () => {
+          expect(await tradeHubInstance.numberProposals()).to.be.equal(1);
+        });
       });
     });
   });
 
   describe("#listProposal", async () => {
-    describe("caller is NOT owner of proposed token", async () => {
-      let listProposal;
+    let proposerAddress,
+      proposerTokenAddress,
+      counterpartTokenAddress,
+      proposerTokenId,
+      counterpartTokenId,
+      listProposal;
 
+    describe("caller is NOT owner of proposed token", async () => {
       beforeEach(async () => {
         listProposal = tradeHubInstance
           .connect(alice)
@@ -220,13 +264,6 @@ describe("Specs: TestTradeHub contract", async () => {
     });
 
     describe("caller is owner of proposed token", async () => {
-      let proposerAddress,
-        proposerTokenAddress,
-        counterpartTokenAddress,
-        proposerTokenId,
-        counterpartTokenId,
-        listProposal;
-
       beforeEach(async () => {
         listProposal = await tradeHubInstance.listProposal(
           niftyAInstance.address,
