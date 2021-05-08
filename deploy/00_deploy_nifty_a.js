@@ -3,14 +3,16 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
   const { owner, alice } = await getNamedAccounts();
 
   await deploy("NiftyA", {
-    from: owner,
-    args: [],
+    from: alice,
+    contract: "TToken",
+    args: ["aaa", "AAA"],
     log: true,
   });
 
   await deploy("NiftyB", {
     from: alice,
-    args: [],
+    contract: "TToken",
+    args: ["bbb", "BBB"],
     log: true,
   });
 
