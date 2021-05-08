@@ -7,6 +7,40 @@ chai.use(solidity);
 
 const { expect } = chai;
 
+const setupTokens = async () => {
+  const [owner, alice, bob] = await ethers.getSigners();
+
+  const niftyAInstance = await ethers.getContract("NiftyA", owner.address);
+  const niftyBInstance = await ethers.getContract("NiftyB", owner.address);
+
+  await niftyAInstance.mint(owner.address, 1);
+  await niftyBInstance.mint(alice.address, 2);
+
+  return {
+    niftyAInstance,
+    niftyBInstance,
+  };
+};
+
+const setupTest = deployments.createFixture(
+  async ({ deployments, ethers }, options) => {
+    await deployments.fixture();
+    const [owner, alice, bob] = await ethers.getSigners();
+
+    const { niftyAInstance, niftyBInstance } = await setupTokens();
+
+    const tradeHubInstance = await ethers.getContract(
+      "TestTradeHub",
+      owner.address
+    );
+
+    return {
+      users: { owner, alice, bob },
+      contractInstances: { tradeHubInstance, niftyAInstance, niftyBInstance },
+    };
+  }
+);
+
 describe("Specs: TestTradeHub contract", async () => {
   let owner, alice, bob;
   let tradeHubInstance;
@@ -14,19 +48,19 @@ describe("Specs: TestTradeHub contract", async () => {
   let niftyBInstance;
 
   beforeEach(async () => {
-    await deployments.fixture();
-    [owner, alice, bob] = await ethers.getSigners();
-    tradeHubInstance = await ethers.getContract("TestTradeHub", owner.address);
+    ({
+      users: { owner, alice, bob },
+      contractInstances: { tradeHubInstance, niftyAInstance, niftyBInstance },
+    } = await setupTest());
   });
 
   describe("#transfer", async () => {
     describe("with approval", async () => {
       beforeEach(async () => {
-        niftyAInstance = await ethers.getContract("NiftyA", owner.address);
         await niftyAInstance.approve(tradeHubInstance.address, 1);
       });
 
-      it("ownership transferred from owner to alice", async () => {
+      it("transfers ownership from owner to alice", async () => {
         await tradeHubInstance._transfer(
           niftyAInstance.address,
           owner.address,
@@ -52,11 +86,6 @@ describe("Specs: TestTradeHub contract", async () => {
   });
 
   describe("#acceptProposal", async () => {
-    beforeEach(async () => {
-      niftyAInstance = await ethers.getContract("NiftyA", owner.address);
-      niftyBInstance = await ethers.getContract("NiftyB", alice.address);
-    });
-
     describe("without proposals", async () => {
       it("reverts transaction", async () => {
         const acceptProposal = tradeHubInstance
@@ -178,8 +207,6 @@ describe("Specs: TestTradeHub contract", async () => {
       let listProposal;
 
       beforeEach(async () => {
-        niftyAInstance = await ethers.getContract("NiftyA", owner.address);
-        niftyBInstance = await ethers.getContract("NiftyB", owner.address);
         listProposal = tradeHubInstance
           .connect(alice)
           .listProposal(niftyAInstance.address, niftyBInstance.address, 1, 2);
@@ -201,8 +228,6 @@ describe("Specs: TestTradeHub contract", async () => {
         listProposal;
 
       beforeEach(async () => {
-        niftyAInstance = await ethers.getContract("NiftyA", owner.address);
-        niftyBInstance = await ethers.getContract("NiftyB", owner.address);
         listProposal = await tradeHubInstance.listProposal(
           niftyAInstance.address,
           niftyBInstance.address,
@@ -271,8 +296,6 @@ describe("Specs: TestTradeHub contract", async () => {
     let delistProposal;
 
     beforeEach(async () => {
-      niftyAInstance = await ethers.getContract("NiftyA", owner.address);
-      niftyBInstance = await ethers.getContract("NiftyB", alice.address);
       await tradeHubInstance.listProposal(
         niftyAInstance.address,
         niftyBInstance.address,
@@ -307,8 +330,6 @@ describe("Specs: TestTradeHub contract", async () => {
 
   describe("#_isOwner", async () => {
     beforeEach(async () => {
-      niftyAInstance = await ethers.getContract("NiftyA", owner.address);
-      niftyBInstance = await ethers.getContract("NiftyB", alice.address);
       await tradeHubInstance.listProposal(
         niftyAInstance.address,
         niftyBInstance.address,
@@ -334,7 +355,6 @@ describe("Specs: TestTradeHub contract", async () => {
 
   describe("#_isApproved", async () => {
     it("with approval emits ApprovalConfirmation event", async () => {
-      niftyAInstance = await ethers.getContract("NiftyA", owner.address);
       await niftyAInstance.approve(tradeHubInstance.address, 1);
       const isApproved = await tradeHubInstance._isApproved(
         niftyAInstance.address,
@@ -353,14 +373,9 @@ describe("Specs: TestTradeHub contract", async () => {
   });
 
   describe("#_isAllApproved", async () => {
-    beforeEach(async () => {
-      niftyAInstance = await ethers.getContract("NiftyA", owner.address);
-      niftyBInstance = await ethers.getContract("NiftyB", alice.address);
-    });
-
     it("with all approvals emits AllApprovalConfirmation event", async () => {
       await niftyAInstance.approve(tradeHubInstance.address, 1);
-      await niftyBInstance.approve(tradeHubInstance.address, 2);
+      await niftyBInstance.connect(alice).approve(tradeHubInstance.address, 2);
       const isAllApproved = await tradeHubInstance._isAllApproved(
         niftyAInstance.address,
         niftyBInstance.address,
@@ -374,7 +389,7 @@ describe("Specs: TestTradeHub contract", async () => {
     });
 
     it("with only one approval doesn't emit AllApprovalConfirmation event", async () => {
-      await niftyBInstance.approve(tradeHubInstance.address, 2);
+      await niftyBInstance.connect(alice).approve(tradeHubInstance.address, 2);
       const isAllApproved = await tradeHubInstance._isAllApproved(
         niftyAInstance.address,
         niftyBInstance.address,
