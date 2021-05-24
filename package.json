@@ -3,6 +3,18 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "build": "hardhat compile",
+    "test": "hardhat test",
+    "coverage": "hardhat coverage",
+    "benchmark": "yarn test benchmark/*.ts",
+    "deploy-all": "hardhat deploy-contracts --network",
+    "deploy": "hardhat deploy --network",
+    "lint": "yarn lint:sol && yarn lint:ts",
+    "lint:sol": "solhint 'contracts/**/*.sol'",
+    "lint:ts": "eslint --max-warnings 0 .",
+    "fmt:sol": "prettier 'contracts/**/*.sol' -w"
+  },
   "dependencies": {},
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
