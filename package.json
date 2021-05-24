@@ -26,7 +26,11 @@
     "ethers": "^5.0.32",
     "hardhat": "^2.1.1",
     "hardhat-deploy": "^0.7.0-beta.49",
-    "hardhat-deploy-ethers": "^0.3.0-beta.7"
+    "hardhat-deploy-ethers": "^0.3.0-beta.7",
+    "prettier": "^2.3.0",
+    "prettier-plugin-solidity": "^1.0.0-beta.10",
+    "solhint": "^3.3.5",
+    "solhint-plugin-prettier": "^0.0.5"
   },
   "author": "Fabian Scherer <48454910+fabianschu@users.noreply.github.com>"
 }
