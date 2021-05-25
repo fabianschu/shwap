@@ -1,17 +1,16 @@
-import logo from "./logo.svg";
-import "./App.css";
 import { Web3ReactProvider } from "@web3-react/core";
-import { ethers } from "ethers";
+import { Web3Provider } from "@ethersproject/providers";
+import ConnectWallet from "./components/ConnectWallet";
 
-function getLibrary(provider, connector) {
-  return new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545/");
+function getLibrary(provider) {
+  const library = new Web3Provider(provider);
+  library.pollingInterval = 12000;
+  return library;
 }
-
 function App() {
-  console.log(getLibrary());
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
-      <div>lol</div>
+      <ConnectWallet />
     </Web3ReactProvider>
   );
 }
