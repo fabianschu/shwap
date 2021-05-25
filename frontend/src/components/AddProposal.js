@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useWeb3React } from "@web3-react/core";
+import { Contract } from "ethers";
+import { address, abi } from "../deployments/TradeHub.json";
 
 const AddProposal = () => {
   const [proposerAddress, setProposerAddress] = useState("");
@@ -8,7 +10,18 @@ const AddProposal = () => {
   const [counterpartId, setCounterpartId] = useState("");
   const { account, library, active } = useWeb3React();
 
-  const handleClick = () => {};
+  const handleClick = async () => {
+    const {
+      functions: { listProposal },
+    } = new Contract(address, abi, library.getSigner());
+
+    await listProposal(
+      proposerAddress,
+      counterpartAddress,
+      proposerId,
+      counterpartId
+    );
+  };
 
   return active ? (
     <div>
