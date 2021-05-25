@@ -6,7 +6,7 @@ const injectedConnector = new InjectedConnector({
 });
 
 const ConnectWallet = () => {
-  const { chainId, account, activate, active } = useWeb3React();
+  const { activate, active } = useWeb3React();
 
   const handleClick = () => {
     activate(injectedConnector);
