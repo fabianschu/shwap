@@ -11,14 +11,15 @@ module.exports = {
   solidity: {
     compilers: [{ version: "0.8.4" }],
   },
-  // networks: {
-  //   hardhat: {
-  //     mining: {
-  //       auto: false,
-  //       interval: 5000,
-  //     },
-  //   },
-  // },
+  networks: {
+    hardhat: {
+      mining: {
+        // auto: false,
+        // interval: 5000,
+      },
+      chainId: 1337,
+    },
+  },
   namedAccounts: {
     owner: {
       default: 0, // here this will by default take the first account as deployer
