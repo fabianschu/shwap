@@ -16,8 +16,8 @@ module.exports = {
       mining: {
         // auto: false,
         // interval: 5000,
-        chainId: 1337,
       },
+      chainId: 1337,
     },
   },
   namedAccounts: {
